@@ -36,7 +36,8 @@ export default createStore({
   state: {
     loginResponse: '',
     registerResponse: '',
-    currentUser: ''
+    currentUser: '',
+    token: localStorage.getItem('authentication_token') || ''
   },
   mutations: {
     loginUser (state, loginResponse) {
