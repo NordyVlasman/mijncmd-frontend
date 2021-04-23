@@ -104,7 +104,6 @@
 </template>
 <script>
 export default {
-  middleware: 'guest',
   data: function () {
     return {
       form: {
@@ -116,16 +115,10 @@ export default {
   methods: {
     async loginUser () {
       this.$store.dispatch('loginUser', this.form)
-
-      // await this.$store.dispatch('auth/')
-
       this.redirect()
     },
     redirect () {
       this.$router.push({ name: 'welcome' })
-    },
-    redirectToHome () {
-      this.$router.push('/about')
     }
   },
   mounted () {
