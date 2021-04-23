@@ -100,11 +100,11 @@
         </div>
       </div>
     </div>
-    <h2>{{ loginResponse }}</h2>
   </div>
 </template>
 <script>
 export default {
+  middleware: 'guest',
   data: function () {
     return {
       form: {
@@ -113,20 +113,16 @@ export default {
       }
     }
   },
-  computed: {
-    loginResponse () {
-      if (this.$store.state.loginResponse.token) {
-        this.redirectToHome()
-      }
-      return this.$store.state.loginResponse
-    }
-  },
   methods: {
-    loginUser () {
-      this.$store.dispatch('loginUser', {
-        email: this.form.email,
-        password: this.form.password
-      })
+    async loginUser () {
+      this.$store.dispatch('loginUser', this.form)
+
+      // await this.$store.dispatch('auth/')
+
+      this.redirect()
+    },
+    redirect () {
+      this.$router.push({ name: 'welcome' })
     },
     redirectToHome () {
       this.$router.push('/about')

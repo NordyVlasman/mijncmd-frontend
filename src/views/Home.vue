@@ -15,6 +15,7 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
+  layout: 'base',
   name: 'Home',
   components: {
     HelloWorld
