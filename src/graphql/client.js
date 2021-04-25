@@ -1,27 +1,12 @@
-import { ApolloClient, ApolloLink, createHttpLink, HttpLink, InMemoryCache } from '@apollo/client/core'
-
-// const createLink = () => {
-//   return createHttpLink({
-//     uri: 'http://localhost:4000/api/graphql'
-//   })
-// }
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/client/core'
+import Cookies from 'js-cookie'
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:4000/api/graphql'
 })
 
-// export const setAuthToken = (token) => {
-//   // eslint-disable-next-line no-unused-vars
-//   const options = {
-//     headers: {
-//       Authorization: token ? `Bearer ${token}` : null
-//     }
-//   }
-//   apolloClient.setLink(createHttpLink(options))
-// }
-
 const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem('authentication_token')
+  const token = Cookies.get('token')
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : null

@@ -100,7 +100,6 @@
         </div>
       </div>
     </div>
-    <h2>{{ loginResponse }}</h2>
   </div>
 </template>
 <script>
@@ -113,23 +112,13 @@ export default {
       }
     }
   },
-  computed: {
-    loginResponse () {
-      if (this.$store.state.loginResponse.token) {
-        this.redirectToHome()
-      }
-      return this.$store.state.loginResponse
-    }
-  },
   methods: {
-    loginUser () {
-      this.$store.dispatch('loginUser', {
-        email: this.form.email,
-        password: this.form.password
-      })
+    async loginUser () {
+      this.$store.dispatch('loginUser', this.form)
+      this.redirect()
     },
-    redirectToHome () {
-      this.$router.push('/about')
+    redirect () {
+      this.$router.push({ name: 'welcome' })
     }
   },
   mounted () {

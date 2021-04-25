@@ -1,22 +1,20 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <button @click="logout">Log out</button>
+  <div>
+    <component :is="layout">
+      <router-view />
+    </component>
   </div>
-  <router-view/>
 </template>
 <script>
-import { defineComponent, provide } from 'vue'
+import { computed, defineComponent, provide } from 'vue'
 import { DefaultApolloClient } from '@vue/apollo-composable'
+import { useRoute } from 'vue-router'
 import apolloClient from './graphql/client'
-import { useRouter } from 'vue-router'
 
 export default defineComponent({
   setup () {
     provide(DefaultApolloClient, apolloClient)
-
-    const router = useRouter()
+    const router = useRoute()
 
     const logout = () => {
       localStorage.removeItem('authentication_token')
@@ -25,8 +23,13 @@ export default defineComponent({
       })
     }
 
+    const layout = computed(() => {
+      return (router.meta.layout || 'base-layout')
+    })
+
     return {
-      logout
+      logout,
+      layout
     }
   }
 })

@@ -1,38 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <form @submit.prevent="loginUser">
-      <input type="text" v-model='form.email'>
-      <input type="password" v-model='form.password'>
-      <button type="submit">Verstuur</button>
-    </form>
+    <h1 class="text-2xl font-bold">Posts</h1>
+    <ul>
+      <div :if="posts" v-for="post in posts" :key="post.id">
+        <li>
+          {{ post.title }}
+        </li>
+      </div>
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import store from '@/store'
 
 export default {
+  layout: 'base',
   name: 'Home',
-  components: {
-    HelloWorld
-  },
-  data: function () {
-    return {
-      form: {
-        email: '',
-        password: ''
-      }
+  computed: {
+    posts () {
+      return store.getters['posts']
     }
   },
-  methods: {
-    loginUser () {
-      this.$store.dispatch('loginUser', {
-        email: this.form.email,
-        password: this.form.password
-      })
+  mounted () {
+    if (store.getters['checkPosts']) {
+      store.dispatch('getPosts')
     }
   }
 }
