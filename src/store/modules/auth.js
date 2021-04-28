@@ -4,6 +4,8 @@ import * as graphqlMutations from '../../graphql/mutations/authMutations'
 import { apolloClient } from '../../graphql/client'
 
 const authModule = {
+  namespaced: true,
+
   state: () => ({
     user: null,
     token: Cookies.get('token')
@@ -59,7 +61,10 @@ const authModule = {
         mutation: graphqlMutations.registerMutation,
         variables: {
           email: payload.email,
-          password: payload.password
+          password: payload.password,
+          name: payload.name,
+          avatar: payload.avatar,
+          handle: payload.handle
         }
       }).then((data) => {
         const payload = data.data.register

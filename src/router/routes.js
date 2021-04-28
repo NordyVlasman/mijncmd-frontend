@@ -31,5 +31,26 @@ export default [
       layout: 'auth-layout'
     },
     component: () => import('@/views/auth/Register.vue')
+  },
+  {
+    path: '/posts/create',
+    name: 'createPost',
+    meta: {
+      middleware: [
+        auth
+      ]
+    },
+    component: () => import('@/views/post/Create.vue')
+  },
+  {
+    path: '/posts/:postId',
+    name: 'post',
+    meta: {
+      middleware: [
+        auth
+      ]
+    },
+    props: true,
+    component: () => import('@/views/post/{slug}.vue')
   }
 ]

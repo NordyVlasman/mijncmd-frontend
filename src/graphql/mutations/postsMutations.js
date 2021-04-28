@@ -6,6 +6,7 @@ export const getAllPostsQuery = gql`
         author {
             dribbbleUrl
             email
+            avatar_url
             githubUrl
             id
             name

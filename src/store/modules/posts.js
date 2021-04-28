@@ -3,6 +3,8 @@ import * as types from '../mutation-types'
 import * as graphqlMutations from '../../graphql/mutations/postsMutations'
 
 const postsModule = {
+  namespaced: true,
+
   state: () => ({
     posts: null
   }),

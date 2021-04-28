@@ -1,9 +1,8 @@
-import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/client/core'
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client/core'
 import Cookies from 'js-cookie'
+import { createLink } from 'apollo-absinthe-upload-link'
 
-const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/api/graphql'
-})
+const httpLink = createLink({ uri: 'http://localhost:4000/api/graphql' })
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   const token = Cookies.get('token')
@@ -15,11 +14,14 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 
   return forward(operation)
 })
+const link = authMiddleware.concat(httpLink)
+
 const cache = new InMemoryCache({})
 
 export const apolloClient = new ApolloClient({
   cache,
-  link: authMiddleware.concat(httpLink),
+  link: link,
+  connectToDevTools: true,
   defaultOptions: {
     watchQuery: {
       fetchPolicy: 'cache-and-network'

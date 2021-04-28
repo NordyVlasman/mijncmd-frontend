@@ -27,6 +27,24 @@
           </div>
 
           <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">
+                Namwe
+            </label>
+            <div class="mt-1">
+              <input id="name" v-model='form.name' name="name" type="text" required="" class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            </div>
+          </div>
+
+            <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">
+                username
+            </label>
+            <div class="mt-1">
+              <input id="name" v-model='form.handle' name="name" type="text" required="" class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+            </div>
+          </div>
+
+          <div>
             <label for="password" class="block text-sm font-medium text-gray-700">
               Password
             </label>
@@ -34,7 +52,14 @@
               <input id="password" v-model='form.password' name="password" type="password" autocomplete="current-password" required="" class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
             </div>
           </div>
-
+<div class="sm:col-span-6">
+                      <label for="photo" class="block text-sm font-medium text-blue-gray-900">
+                        Photo
+                      </label>
+                      <div class="flex items-center mt-1">
+                        <input type="file" @change="handleFileChange" />
+                      </div>
+                    </div>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
               <input id="remember_me" name="remember_me" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
@@ -100,7 +125,6 @@
         </div>
       </div>
     </div>
-    <h2>{{ loginResponse  }}</h2>
   </div>
 </template>
 <script>
@@ -109,21 +133,25 @@ export default {
     return {
       form: {
         email: '',
-        password: ''
+        password: '',
+        avatar: '',
+        name: '',
+        handle: ''
       }
-    }
-  },
-  computed: {
-    registerResponse () {
-      return this.$store.state.registerResponse
     }
   },
   methods: {
     registerUser () {
       this.$store.dispatch('registerUser', {
         email: this.form.email,
-        password: this.form.password
+        password: this.form.password,
+        avatar: this.form.avatar,
+        name: this.form.name,
+        handle: this.form.handle
       })
+    },
+    handleFileChange (e) {
+      this.form.avatar = e.target.files[0]
     }
   }
 }
