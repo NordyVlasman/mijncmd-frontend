@@ -4,7 +4,10 @@
     <div class="flex flex-col w-24">
       <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
         <div class="flex items-center flex-shrink-0 px-4">
-          <h1 class="font-sans text-2xl font-bold text-center">Mijn.<br />CMD</h1>
+          <router-link to="/" class="font-sans text-2xl font-bold text-center">
+            Mijn. <br/>
+            CMD
+          </router-link>
         </div>
         <div class="flex flex-col flex-1 mt-5">
           <nav class="flex-1 px-2 space-y-1">

@@ -11,29 +11,36 @@
         </div>
       </div>
       <div class="mt-5 md:mt-0 md:col-span-2">
-        <form action="#" method="POST">
+        <form @submit.prevent='createPost'>
           <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="px-4 py-5 space-y-6 bg-white sm:p-6">
               <div class="grid grid-cols-3 gap-6">
                 <div class="col-span-3 sm:col-span-2">
                   <label for="company_website" class="block text-sm font-medium text-gray-700">
-                    Website
+                    Title
                   </label>
                   <div class="flex mt-1 rounded-md shadow-sm">
-                    <span class="inline-flex items-center px-3 text-sm text-gray-500 border border-r-0 border-gray-300 rounded-l-md bg-gray-50">
-                      http://
-                    </span>
-                    <input type="text" name="company_website" id="company_website" class="flex-1 block w-full border-gray-300 rounded-none focus:ring-indigo-500 focus:border-indigo-500 rounded-r-md sm:text-sm" placeholder="www.example.com" />
+                    <input type="text" name="company_website" v-model="form.title" id="company_website" class="flex-1 block w-full border-gray-300 rounded-none focus:ring-indigo-500 focus:border-indigo-500 rounded-r-md sm:text-sm"/>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3 sm:col-span-2">
+                  <label for="company_website" class="block text-sm font-medium text-gray-700">
+                    Title
+                  </label>
+                  <div class="flex mt-1 rounded-md shadow-sm">
+                    <input type="text" disabled name="company_website" v-model="slug" id="company_website" class="flex-1 block w-full border-gray-300 rounded-none focus:ring-indigo-500 focus:border-indigo-500 rounded-r-md sm:text-sm"/>
                   </div>
                 </div>
               </div>
 
               <div>
                 <label for="about" class="block text-sm font-medium text-gray-700">
-                  About
+                  Description
                 </label>
                 <div class="mt-1">
-                  <textarea id="about" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="you@example.com" />
+                  <textarea id="about" v-model="form.description" name="about" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  />
                 </div>
                 <p class="mt-2 text-sm text-gray-500">
                   Brief description for your profile. URLs are hyperlinked.
@@ -41,19 +48,19 @@
               </div>
 
               <div>
-                <label class="block text-sm font-medium text-gray-700">
-                  Photo
+                <label for="about" class="block text-sm font-medium text-gray-700">
+                  Body
                 </label>
-                <div class="flex items-center mt-1">
-                  <span class="inline-block w-12 h-12 overflow-hidden bg-gray-100 rounded-full">
-                    <svg class="w-full h-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  </span>
-                  <button type="button" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Change
-                  </button>
+                <div class="mt-1">
+                  <v-md-editor
+                    left-toolbar="undo redo clear | h bold italic strikethrough quote | ul ol table hr | link image code"
+                    right-toolbar="preview fullscreen"
+                    v-model="form.body"
+                    height="400px" />
                 </div>
+                <p class="mt-2 text-sm text-gray-500">
+                  Brief description for your profile. URLs are hyperlinked.
+                </p>
               </div>
 
               <div>
@@ -91,3 +98,33 @@
   </div>
   </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      form: {
+        title: '',
+        description: '',
+        body: ''
+      }
+    }
+  },
+  computed: {
+    slug: function () {
+      var slug = this.sluggify(this.form.title)
+      return slug
+    }
+  },
+  methods: {
+    sluggify (title) {
+      return title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, '-and-').replace('/--/g', '-')
+    },
+    async createPost () {
+      const payload = this.form
+      payload.slug = this.slug
+      console.log(payload)
+      this.$store.dispatch('posts/createPost', payload)
+    }
+  }
+}
+</script>
