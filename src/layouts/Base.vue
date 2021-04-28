@@ -4,7 +4,10 @@
     <div class="flex flex-col w-24">
       <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
         <div class="flex items-center flex-shrink-0 px-4">
-          <h1 class="font-sans text-2xl font-bold text-center">Mijn.<br />CMD</h1>
+          <router-link to="/" class="font-sans text-2xl font-bold text-center">
+            Mijn. <br/>
+            CMD
+          </router-link>
         </div>
         <div class="flex flex-col flex-1 mt-5">
           <nav class="flex-1 px-2 space-y-1">
@@ -52,19 +55,24 @@
             <div>
               <button type="button" class="flex items-center max-w-xs text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                 <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=uuHHGtFdOW&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                <div v-if="user">
+                  <img :src="`http://localhost:4000${user.avatar_url}`" :alt="user.email" class="w-8 h-8 rounded-full">
+                </div>
               </button>
             </div>
           </div>
-          <a>
+          <!-- <a>
               <div class="pt-2 pb-2 pl-10 pr-10 m-6 text-white bg-green-400 rounded-xl">Uploaden</div>
-            </a>
+          </a> -->
+          <router-link :to="{ name: 'createPost' }" class="pt-2 pb-2 pl-10 pr-10 m-6 text-white bg-green-400 rounded-xl">
+            Uploaden
+          </router-link>
         </div>
       </div>
     </div>
 
     <main class="relative flex-1 overflow-y-auto focus:outline-none">
-      <div class="py-6">
+      <div class="">
         <slot />
       </div>
     </main>
@@ -74,7 +82,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'BaseLayout'
+  name: 'BaseLayout',
+  computed: mapGetters({
+    user: 'auth/user'
+  })
 }
 </script>

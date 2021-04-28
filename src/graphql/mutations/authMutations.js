@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 export const loginMutation = gql`
   mutation login($email: String!, $password: String!) {
@@ -6,17 +6,23 @@ export const loginMutation = gql`
       token,
       user {
         id,
-        email
+        email,
+        avatar_url
       }
     }
   }
 `
 
 export const registerMutation = gql`
-  mutation register($email: String!, $password: String!) {
-    register(email: $email, password: $password) {
-      email,
-      id
+  mutation register ($avatar: Upload, $dribbbleUrl: String, $email: String!, $githubUrl: String, $name: String!, $password: String!, $websiteUrl: String, $handle: String!) {
+    register (avatar: $avatar, dribbbleUrl: $dribbbleUrl, email: $email, githubUrl: $githubUrl, name: $name, password: $password, websiteUrl: $websiteUrl, handle: $handle) {
+        avatar_url
+        dribbbleUrl
+        email
+        githubUrl
+        id
+        name
+        websiteUrl
     }
   }
 `
@@ -26,6 +32,7 @@ export const currentUserQuery = gql`
     getUser {
       email
       id
+      avatar_url
     }
   }
 `
