@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     async loginUser () {
-      this.$store.dispatch('loginUser', this.form)
+      this.$store.dispatch('auth/loginUser', this.form)
       this.redirect()
     },
     redirect () {

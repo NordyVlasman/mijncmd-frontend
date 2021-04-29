@@ -14,7 +14,7 @@
                     <img alt="Placeholder" class="inline w-12 h-12 mr-2 rounded-full"
                       :src="`http://localhost:4000${post.author.avatar_url}`">
                     <div class="inline">
-                      <router-link :to="{ name: 'post', params: { postId: post.id }}" class="text-2xl">
+                      <router-link :to="{ name: 'post', params: { postId: post.id, postSlug: post.slug }}" class="text-2xl">
                         {{ post.title }}
                       </router-link>
                       <p class="text-sm text-blue-600">
