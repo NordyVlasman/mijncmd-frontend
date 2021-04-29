@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     registerUser () {
-      this.$store.dispatch('registerUser', {
+      this.$store.dispatch('auth/registerUser', {
         email: this.form.email,
         password: this.form.password,
         avatar: this.form.avatar,

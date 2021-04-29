@@ -43,7 +43,7 @@ export default [
     component: () => import('@/views/post/Create.vue')
   },
   {
-    path: '/posts/:postId',
+    path: '/posts/:postSlug',
     name: 'post',
     meta: {
       middleware: [

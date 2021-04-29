@@ -6,7 +6,8 @@ const postsModule = {
   namespaced: true,
 
   state: () => ({
-    posts: null
+    posts: null,
+    postError: null
   }),
 
   mutations: {
@@ -14,7 +15,7 @@ const postsModule = {
       state.posts = posts
     },
     [types.FETCH_POSTS_FAILURE] (state) {
-      state.error = ''
+      state.postError = state
     }
   },
 
@@ -30,6 +31,8 @@ const postsModule = {
         }
       }).then((data) => {
         console.log(data)
+      }).catch((error) => {
+        console.log(error)
       })
     },
     async getPosts ({ commit, dispatch }) {
@@ -38,13 +41,17 @@ const postsModule = {
       }).then((data) => {
         const payload = data.data.getPosts
         commit(types.FETCH_POSTS_SUCCESS, payload)
+      }).catch((error) => {
+        console.log(error)
+        commit(types.FETCH_POSTS_FAILURE, error)
       })
     }
   },
 
   getters: {
     posts: state => state.posts,
-    checkPosts: state => state.posts !== null
+    checkPosts: state => state.posts !== null,
+    errors: state => state.postError
   }
 }
 
