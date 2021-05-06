@@ -4,16 +4,16 @@
     <p>
       {{ currentUser }}
     </p>
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="container px-4 mx-auto sm:px-6 lg:px-8">
       <ul class="space-y-4">
-        <li v-for="post in posts" :key="post.id" class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+        <li v-for="post in posts" :key="post.id" class="px-4 py-6 bg-white shadow sm:p-6 sm:rounded-lg">
           <article :aria-labelledby="'post-title-' + post.id">
             <div>
               <div class="flex space-x-3">
                 <div class="flex-shrink-0">
-<!--                  <img class="h-10 w-10 rounded-full" :src="post.author.imageUrl" alt="" />-->
+<!--                  <img class="w-10 h-10 rounded-full" :src="post.author.imageUrl" alt="" />-->
                 </div>
-                <div class="min-w-0 flex-1">
+                <div class="flex-1 min-w-0">
                   <p class="text-sm font-medium text-gray-900">
                     <a href="#" class="hover:underline">{{ post.author.name }}</a>
                   </p>
@@ -23,33 +23,33 @@
 <!--                    </a>-->
                   </p>
                 </div>
-                <div class="flex-shrink-0 self-center flex">
+                <div class="flex self-center flex-shrink-0">
                   <Menu as="div" class="relative inline-block text-left">
                     <div>
-                      <MenuButton class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600">
+                      <MenuButton class="flex items-center p-2 -m-2 text-gray-400 rounded-full hover:text-gray-600">
                         <span class="sr-only">Open options</span>
-                        <DotsVerticalIcon class="h-5 w-5" aria-hidden="true" />
+                        <DotsVerticalIcon class="w-5 h-5" aria-hidden="true" />
                       </MenuButton>
                     </div>
 
-                    <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                      <MenuItems class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <transition enter-active-class="transition duration-100 ease-out" enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100" leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
+                      <MenuItems class="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div class="py-1">
                           <MenuItem v-slot="{ active }">
                             <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'flex px-4 py-2 text-sm']">
-                              <StarIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                              <StarIcon class="w-5 h-5 mr-3 text-gray-400" aria-hidden="true" />
                               <span>Add to favorites</span>
                             </a>
                           </MenuItem>
                           <MenuItem v-slot="{ active }">
                             <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'flex px-4 py-2 text-sm']">
-                              <CodeIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                              <CodeIcon class="w-5 h-5 mr-3 text-gray-400" aria-hidden="true" />
                               <span>Embed</span>
                             </a>
                           </MenuItem>
                           <MenuItem v-slot="{ active }">
                             <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'flex px-4 py-2 text-sm']">
-                              <FlagIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                              <FlagIcon class="w-5 h-5 mr-3 text-gray-400" aria-hidden="true" />
                               <span>Report content</span>
                             </a>
                           </MenuItem>
@@ -63,26 +63,26 @@
                 {{ post.title }}
               </h2>
             </div>
-            <div class="mt-2 text-sm text-gray-700 space-y-4" v-html="post.description" />
-            <div class="mt-6 flex justify-between space-x-8">
+            <div class="mt-2 space-y-4 text-sm text-gray-700" v-html="post.description" />
+            <div class="flex justify-between mt-6 space-x-8">
               <div class="flex space-x-6">
                       <span class="inline-flex items-center text-sm">
                         <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                          <ThumbUpIcon class="h-5 w-5" aria-hidden="true" />
+                          <ThumbUpIcon class="w-5 h-5" aria-hidden="true" />
                           <span class="font-medium text-gray-900">1</span>
                           <span class="sr-only">likes</span>
                         </button>
                       </span>
                 <span class="inline-flex items-center text-sm">
                         <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                          <ChatAltIcon class="h-5 w-5" aria-hidden="true" />
+                          <ChatAltIcon class="w-5 h-5" aria-hidden="true" />
                           <span class="font-medium text-gray-900">12</span>
                           <span class="sr-only">replies</span>
                         </button>
                       </span>
                 <span class="inline-flex items-center text-sm">
                         <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                          <EyeIcon class="h-5 w-5" aria-hidden="true" />
+                          <EyeIcon class="w-5 h-5" aria-hidden="true" />
                           <span class="font-medium text-gray-900">104</span>
                           <span class="sr-only">views</span>
                         </button>
@@ -91,7 +91,7 @@
               <div class="flex text-sm">
                       <span class="inline-flex items-center text-sm">
                         <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                          <ShareIcon class="h-5 w-5" aria-hidden="true" />
+                          <ShareIcon class="w-5 h-5" aria-hidden="true" />
                           <span class="font-medium text-gray-900">Share</span>
                         </button>
                       </span>
@@ -104,21 +104,18 @@
   </div>
 </template>
 <script>
-import { Menu, MenuButton, MenuItems, MenuItem, Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+
 import {
   ChatAltIcon,
   CodeIcon,
   DotsVerticalIcon,
   EyeIcon,
   FlagIcon,
-  PlusIcon,
-  SearchIcon,
   ShareIcon,
   StarIcon,
-  ThumbUpIcon,
+  ThumbUpIcon
 } from '@heroicons/vue/solid'
-import { BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, XIcon } from '@heroicons/vue/outline'
-
 
 export default {
   layout: 'base',
@@ -128,22 +125,14 @@ export default {
     MenuButton,
     MenuItem,
     MenuItems,
-    Popover,
-    PopoverButton,
-    PopoverPanel,
-    BellIcon,
     ChatAltIcon,
     CodeIcon,
     DotsVerticalIcon,
     EyeIcon,
     FlagIcon,
-    MenuIcon,
-    PlusIcon,
-    SearchIcon,
     ShareIcon,
     StarIcon,
-    ThumbUpIcon,
-    XIcon,
+    ThumbUpIcon
   },
   computed: {
     currentUser () {

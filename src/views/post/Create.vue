@@ -1,6 +1,9 @@
 <template>
   <div>
-<div>
+    <div class="container bg-white">
+      <div id="editor-container" class="prose lg:prose-xl"/>
+    </div>
+<!-- <div>
     <div class="md:grid md:grid-cols-3 md:gap-6">
       <div class="md:col-span-1">
         <div class="px-4 sm:px-0">
@@ -95,10 +98,16 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> -->
   </div>
 </template>
 <script>
+import EditorJS from '@editorjs/editorjs'
+import Header from '@editorjs/header'
+import Paragraph from '@editorjs/paragraph'
+import Code from '@editorjs/code'
+import List from '@editorjs/list'
+import Image from '@editorjs/image'
 export default {
   data () {
     return {
@@ -116,6 +125,26 @@ export default {
     }
   },
   methods: {
+    editor () {
+      window.editor = new EditorJS({
+        holderId: 'editor-container',
+        tools: {
+          image: Image,
+          code: Code,
+          list: List,
+          header: {
+            class: Header,
+            inlineToolbar: ['link']
+          },
+          paragraph: {
+            class: Paragraph,
+            config: {
+              placeholder: '.'
+            }
+          }
+        }
+      })
+    },
     sluggify (title) {
       return title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, '-and-').replace('/--/g', '-')
     },
@@ -125,6 +154,20 @@ export default {
       console.log(payload)
       this.$store.dispatch('posts/createPost', payload)
     }
+  },
+  mounted () {
+    this.editor()
   }
 }
 </script>
+
+<style>
+editorx_body {
+  /* width: 62%;
+  margin-left: 15%; */
+  width: 60%;
+  margin-left: 20%;
+  border: 2px solid #f1f3f5;
+  box-sizing: border-box;
+}
+</style>
