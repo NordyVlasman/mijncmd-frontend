@@ -42,6 +42,9 @@
           </form>
         </div>
         <div class="flex items-center ml-4 md:ml-6">
+          <router-link :to="{ name: 'createPost' }" class="pt-2 pb-2 pl-10 pr-10 m-6 text-blue-800 bg-blue-100 rounded-xl">
+            Uploaden
+          </router-link>
           <button class="p-1 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->
@@ -51,7 +54,7 @@
           </button>
 
           <!-- Profile dropdown -->
-          <div class="relative ml-3">
+          <div class="relative pr-10 ml-5">
             <div>
               <button type="button" class="flex items-center max-w-xs text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                 <span class="sr-only">Open user menu</span>
@@ -64,9 +67,6 @@
           <!-- <a>
               <div class="pt-2 pb-2 pl-10 pr-10 m-6 text-white bg-green-400 rounded-xl">Uploaden</div>
           </a> -->
-          <router-link :to="{ name: 'createPost' }" class="pt-2 pb-2 pl-10 pr-10 m-6 text-white bg-green-400 rounded-xl">
-            Uploaden
-          </router-link>
         </div>
       </div>
     </div>
