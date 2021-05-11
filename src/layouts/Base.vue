@@ -1,93 +1,202 @@
 <template>
   <div class="flex h-screen overflow-hidden bg-gray-100">
-  <div class="hidden bg-white md:flex md:flex-shrink-0">
-    <div class="flex flex-col w-24">
-      <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
-        <div class="flex items-center flex-shrink-0 px-4">
-          <router-link to="/" class="font-sans text-2xl font-bold text-center">
-            Mijn. <br/>
-            CMD
-          </router-link>
-        </div>
-        <div class="flex flex-col flex-1 mt-5">
-          <nav class="flex-1 px-2 space-y-1">
-            <!-- nav hier -->
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-col flex-1 w-0 overflow-hidden">
-    <div class="relative z-10 flex flex-shrink-0 h-24 bg-white shadow">
-      <button type="button" class="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden">
-        <span class="sr-only">Open sidebar</span>
-        <!-- Heroicon name: outline/menu-alt-2 -->
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
-        </svg>
-      </button>
-      <div class="flex justify-between flex-1 px-4">
-        <div class="flex flex-1">
-          <form class="flex w-full md:ml-0" action="#" method="GET">
-            <label for="search_field" class="sr-only">Search</label>
-            <div class="relative w-full text-gray-400 focus-within:text-gray-600">
-              <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                <!-- Heroicon name: solid/search -->
-                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                </svg>
+    <TransitionRoot as="template" :show="sidebarOpen">
+      <Dialog as="div" static class="fixed inset-0 z-40 flex md:hidden" @close="sidebarOpen = false" :open="sidebarOpen">
+        <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
+          <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75" />
+        </TransitionChild>
+        <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
+          <div class="relative flex flex-col flex-1 w-full max-w-xs pt-5 pb-4 bg-white">
+            <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
+              <div class="absolute top-0 right-0 p-1 -mr-14">
+                <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none focus:bg-gray-600" @click="sidebarOpen = false">
+                  <XIcon class="w-6 h-6 text-white" aria-hidden="true" />
+                  <span class="sr-only">Close sidebar</span>
+                </button>
               </div>
-              <input id="search_field" class="block w-full h-full py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 border-transparent focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm" placeholder="Search" type="search" name="search" />
+            </TransitionChild>
+            <div class="flex items-center flex-shrink-0 px-4">
+              <h2>MijnCMD</h2>
             </div>
-          </form>
-        </div>
-        <div class="flex items-center ml-4 md:ml-6">
-          <router-link :to="{ name: 'createPost' }" class="pt-2 pb-2 pl-10 pr-10 m-6 text-blue-800 bg-blue-100 rounded-xl">
-            Uploaden
-          </router-link>
-          <button class="p-1 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span class="sr-only">View notifications</span>
-            <!-- Heroicon name: outline/bell -->
-            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-            </svg>
-          </button>
-
-          <!-- Profile dropdown -->
-          <div class="relative pr-10 ml-5">
-            <div>
-              <button type="button" class="flex items-center max-w-xs text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                <span class="sr-only">Open user menu</span>
-                <div v-if="user">
-                  <img :src="`http://localhost:4000${user.avatar_url}`" :alt="user.email" class="w-8 h-8 rounded-full">
+            <div class="flex-1 h-0 mt-5 overflow-y-auto">
+              <nav class="flex flex-col h-full">
+                <div class="space-y-1">
+                  <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-purple-50 border-purple-600 text-purple-600' : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group border-l-4 py-2 px-3 flex items-center text-base font-medium']" :aria-current="item.current ? 'page' : undefined">
+                    <component :is="item.icon" :class="[item.current ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 h-6 w-6']" aria-hidden="true" />
+                    {{ item.name }}
+                  </a>
                 </div>
-              </button>
+              </nav>
             </div>
           </div>
-          <!-- <a>
-              <div class="pt-2 pb-2 pl-10 pr-10 m-6 text-white bg-green-400 rounded-xl">Uploaden</div>
-          </a> -->
+        </TransitionChild>
+        <div class="flex-shrink-0 w-14" aria-hidden="true">
+          <!-- Dummy element to force sidebar to shrink to fit close icon -->
+        </div>
+      </Dialog>
+    </TransitionRoot>
+
+    <!-- Static sidebar for desktop -->
+    <div class="hidden md:flex md:flex-shrink-0">
+        <nav class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto border-r border-gray-200 bg-gray-50" :class="showLabel ? 'w-64' : '' " :key="showLabel">
+          <div class="flex items-center flex-shrink-0" :class="showLabel ? 'px-4' : 'justify-center'">
+            <h4 class="font-bold" :class="showLabel ? 'hidden' : ''">Mijn CMD</h4>
+            <h2 class="font-bold" :class="!showLabel ? 'hidden' : ''">Mijn CMD</h2>
+            <!--            <img class="w-auto h-8" :class="!showLabel ? 'hidden' : ''" src="https://tailwindui.com/img/logos/easywire-logo-purple-600-mark-gray-900-text.svg" alt="Easywire" />-->
+<!--            <img class="w-auto h-8" :class="!showLabel ? '' : 'hidden'" src="https://tailwindui.com/img/logos/workflow-mark.svg" alt="Workflow" />-->
+          </div>
+          <div class="relative w-full h-4 bg-gray-400">
+              <div class="absolute right-0 z-20 w-8 h-8 mt-5 -mr-2 bg-green-200"></div>
+          </div>
+          <div class="flex flex-col flex-grow mt-10" :class="showLabel ? '' : ''">
+            <div class="flex-1 space-y-1">
+              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-pink-50 border-pink-600 text-pink-600' : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50', 'group border-l-2 py-2 px-3 flex items-center text-sm', showLabel ?  '' : 'justify-center']">
+                <component :is="item.icon" :class="[item.current ? 'text-pink-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 h-6 w-6']" aria-hidden="true" />
+                <span v-if="showLabel">{{ item.name }}</span>
+              </a>
+            </div>
+          </div>
+          <div class="justify-center flex-shrink-0 block w-full">
+            <a v-for="item in secondaryNavigation" :key="item.name" :href="item.href" class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 border-l-4 border-transparent group hover:text-gray-900 hover:bg-gray-50" :class="showLabel ? '' : 'justify-center'">
+              <component :is="item.icon" class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+              <span v-if="showLabel">{{ item.name }}</span>
+            </a>
+            <div class="mt-auto space-y-1">
+              <div class="flex flex-shrink-0 p-4">
+                <a href="#" class="flex-shrink-0 block w-full group">
+                  <div class="flex items-center">
+                    <div>
+                      <img class="inline-block rounded-full h-9 w-9" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=uuHHGtFdOW&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                    </div>
+                    <div class="ml-3" v-if="showLabel">
+                      <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                        Tom Cook
+                      </p>
+                      <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                        View profile
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+    </div>
+    <!-- Content area -->
+    <div class="flex flex-col flex-1">
+      <div class="w-full px-6 mx-auto md:px-8">
+        <div class="relative z-10 flex flex-shrink-0 h-16">
+          <button class="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 md:hidden" @click="showLabel = true">
+            <span class="sr-only">Open sidebar</span>
+            <MenuAlt2Icon class="w-6 h-6" aria-hidden="true" />
+          </button>
+          <div class="flex justify-between flex-1 px-4 md:px-0">
+            <div class="px-3 sm:mt-0 md:mt-4">
+              <label for="search" class="sr-only">Search</label>
+              <div class="relative mt-1 rounded-md shadow-sm">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" aria-hidden="true">
+                  <!-- Heroicon name: solid/search -->
+                  <svg class="w-4 h-4 mr-3 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <input type="text" name="search" id="search" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 pl-9 sm:text-sm" placeholder="Search">
+              </div>
+            </div>
+            <div class="flex items-center ml-4 md:ml-6">
+              <div class="flex mt-4 sm:mt-0 sm:ml-4">
+                <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border border-transparent rounded-md shadow-sm order-0 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">
+                  Create
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <main class="relative flex-1 overflow-y-auto focus:outline-none">
-      <div class="">
+      <main class="flex-1 px-6 overflow-y-auto focus:outline-none">
         <slot />
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
-</div>
-
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { ref } from 'vue'
+import {
+  Dialog,
+  DialogOverlay,
+  Switch,
+  SwitchGroup,
+  SwitchLabel,
+  TransitionChild,
+  TransitionRoot,
+} from '@headlessui/vue'
+import {
+  BellIcon,
+  BriefcaseIcon,
+  ChatIcon,
+  CogIcon,
+  DocumentSearchIcon,
+  MenuAlt2Icon,
+  QuestionMarkCircleIcon,
+  XIcon,
+} from '@heroicons/vue/outline'
+import { SearchIcon } from '@heroicons/vue/solid'
+
+
+import { HomeIcon, HeartIcon, DocumentIcon, UsersIcon, InformationIcon, NotificationIcon } from '@/components/icons'
+
+const navigation = [
+  { name: 'Home', href: '#', icon: HomeIcon, current: true },
+  { name: 'Informatie', href: '#', icon: InformationIcon, current: false },
+  { name: 'Community', href: '#', icon: HeartIcon, current: false },
+  { name: 'Assesments', href: '#', icon: DocumentIcon, current: false },
+  { name: 'Contacten', href: '#', icon: UsersIcon, current: false }
+]
+const secondaryNavigation = [
+  { name: 'Feedback', href: '#', icon: NotificationIcon }
+
+]
+const tabs = [
+  { name: 'General', href: '#', current: true },
+  { name: 'Password', href: '#', current: false },
+  { name: 'Notifications', href: '#', current: false },
+  { name: 'Plan', href: '#', current: false },
+  { name: 'Billing', href: '#', current: false },
+  { name: 'Team Members', href: '#', current: false },
+]
 
 export default {
-  name: 'BaseLayout',
-  computed: mapGetters({
-    user: 'auth/user'
-  })
+  components: {
+    Dialog,
+    DialogOverlay,
+    Switch,
+    SwitchGroup,
+    SwitchLabel,
+    TransitionChild,
+    TransitionRoot,
+    BellIcon,
+    MenuAlt2Icon,
+    SearchIcon,
+    XIcon,
+  },
+  setup() {
+    const sidebarOpen = ref(false)
+    const automaticTimezoneEnabled = ref(true)
+    const autoUpdateApplicantDataEnabled = ref(false)
+    const showLabel = ref(false)
+
+    return {
+      navigation,
+      secondaryNavigation,
+      tabs,
+      sidebarOpen,
+      automaticTimezoneEnabled,
+      autoUpdateApplicantDataEnabled,
+      showLabel
+    }
+  },
 }
 </script>
