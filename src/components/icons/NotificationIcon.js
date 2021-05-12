@@ -2,8 +2,8 @@ const { createVNode: _createVNode, openBlock: _openBlock, createBlock: _createBl
 
 module.exports = function render(_ctx, _cache) {
   return (_openBlock(), _createBlock("svg", {
-    width: "24",
-    height: "28",
+    width: "21",
+    height: "19",
     fill: "none",
     viewBox: "0 0 24 28"
   }, [

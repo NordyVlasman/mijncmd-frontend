@@ -42,8 +42,8 @@
             <h5 class="font-bold" :class="showLabel ? 'hidden' : ''">Mijn CMD</h5>
             <h2 class="font-bold" :class="!showLabel ? 'hidden' : ''">Mijn CMD</h2>
           </div>
-          <span class="absolute inset-0 object-right-top left-20 top-11" :class="showLabel ? 'left-64 -ml-4' : ''">
-            <div class="inline-flex items-center px-2 py-1 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-gray-800 text-white" @click="showLabel = !showLabel">
+          <span class="absolute inset-0 object-right-top left-20 top-1/2" :class="showLabel ? 'left-64 -ml-4' : ''">
+            <div class="inline-flex items-center px-2 py-1 text-xs font-semibold leading-4 text-white bg-gray-800 border-2 border-white rounded-full" @click="showLabel = !showLabel">
               <span v-if="showLabel"> &lt; </span>
               <span v-if="!showLabel"> > </span>
             </div>
@@ -106,9 +106,14 @@
             </div>
             <div class="flex items-center ml-4 md:ml-6">
               <div class="flex mt-0 sm:mt-4 sm:ml-4">
-                <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border border-transparent rounded-md shadow-sm order-0 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 sm:order-1 sm:ml-3">
+                <router-link
+                  :to="{
+                    name: 'createPost'
+                  }"
+                  class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border border-transparent rounded-md shadow-sm order-0 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 sm:order-1 sm:ml-3"
+                >
                   Create
-                </button>
+                </router-link>
               </div>
             </div>
           </div>
