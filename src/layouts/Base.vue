@@ -36,18 +36,20 @@
       </Dialog>
     </TransitionRoot>
 
-    <!-- Static sidebar for desktop -->
-    <div class="hidden md:flex md:flex-shrink-0">
-        <nav class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto border-r border-gray-200 bg-gray-50" :class="showLabel ? 'w-64' : '' " :key="showLabel">
+      <div class="hidden md:flex md:flex-shrink-0">
+        <nav class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto border-r border-gray-200 bg-gray-50" :class="showLabel ? 'w-64' : 'w-24' " :key="showLabel">
           <div class="flex items-center flex-shrink-0" :class="showLabel ? 'px-4' : 'justify-center'">
-            <h4 class="font-bold" :class="showLabel ? 'hidden' : ''">Mijn CMD</h4>
+            <h5 class="font-bold" :class="showLabel ? 'hidden' : ''">Mijn CMD</h5>
             <h2 class="font-bold" :class="!showLabel ? 'hidden' : ''">Mijn CMD</h2>
             <!--            <img class="w-auto h-8" :class="!showLabel ? 'hidden' : ''" src="https://tailwindui.com/img/logos/easywire-logo-purple-600-mark-gray-900-text.svg" alt="Easywire" />-->
-<!--            <img class="w-auto h-8" :class="!showLabel ? '' : 'hidden'" src="https://tailwindui.com/img/logos/workflow-mark.svg" alt="Workflow" />-->
+            <!--            <img class="w-auto h-8" :class="!showLabel ? '' : 'hidden'" src="https://tailwindui.com/img/logos/workflow-mark.svg" alt="Workflow" />-->
           </div>
-          <div class="relative w-full h-4 bg-gray-400">
-              <div class="absolute right-0 z-20 w-8 h-8 mt-5 -mr-2 bg-green-200"></div>
-          </div>
+          <span class="absolute inset-0 object-right-top left-20 top-11" :class="showLabel ? 'left-64 -ml-4' : ''">
+            <div class="inline-flex items-center px-2 py-1 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-gray-800 text-white" @click="showLabel = !showLabel">
+              <span v-if="showLabel"> &lt; </span>
+              <span v-if="!showLabel"> > </span>
+            </div>
+          </span>
           <div class="flex flex-col flex-grow mt-10" :class="showLabel ? '' : ''">
             <div class="flex-1 space-y-1">
               <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-pink-50 border-pink-600 text-pink-600' : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50', 'group border-l-2 py-2 px-3 flex items-center text-sm', showLabel ?  '' : 'justify-center']">
@@ -64,7 +66,7 @@
             <div class="mt-auto space-y-1">
               <div class="flex flex-shrink-0 p-4">
                 <a href="#" class="flex-shrink-0 block w-full group">
-                  <div class="flex items-center">
+                  <div class="flex items-center" :class="showLabel ? '' : 'justify-center'">
                     <div>
                       <img class="inline-block rounded-full h-9 w-9" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=uuHHGtFdOW&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                     </div>
@@ -82,7 +84,7 @@
             </div>
           </div>
         </nav>
-    </div>
+      </div>
     <!-- Content area -->
     <div class="flex flex-col flex-1">
       <div class="w-full px-6 mx-auto md:px-8">

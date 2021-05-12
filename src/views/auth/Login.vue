@@ -115,11 +115,7 @@ export default {
   methods: {
     async loginUser () {
       this.$store.dispatch('auth/loginUser', this.form)
-      this.redirect()
     },
-    redirect () {
-      this.$router.push({ name: 'welcome' })
-    }
   },
   mounted () {
     const token = localStorage.getItem('authentication_token')

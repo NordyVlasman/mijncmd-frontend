@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 import * as types from '../mutation-types'
 import * as graphqlMutations from '../../graphql/mutations/authMutations'
 import { apolloClient } from '../../graphql/client'
+import router from "@/router";
 
 const authModule = {
   namespaced: true,
@@ -15,6 +16,11 @@ const authModule = {
     [types.SAVE_TOKEN] (state, token) {
       state.token = token
       Cookies.set('token', token)
+      if (token) {
+        router.push({
+          name: 'welcome'
+        })
+      }
     },
 
     [types.FETCH_USER_SUCCESS] (state, user) {
@@ -78,6 +84,8 @@ const authModule = {
       }).then((data) => {
         const payload = data.data.getUser
         commit(types.UPDATE_USER, payload)
+      }).catch(() => {
+        commit(types.LOGOUT)
       })
     }
   },
