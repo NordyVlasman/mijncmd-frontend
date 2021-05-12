@@ -28,4 +28,3 @@ app.component('auth-layout', Auth)
 app.component('base-layout', Base)
 app.config.devtools = true
 app.mount('#app')
-// createApp(App).use(store).use(router).mount('#app')

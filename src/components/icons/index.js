@@ -1,0 +1,7 @@
+module.exports.DocumentIcon = require("./DocumentIcon.js")
+module.exports.HeartIcon = require("./HeartIcon.js")
+module.exports.HomeIcon = require("./HomeIcon.js")
+module.exports.InformationIcon = require("./InformationIcon.js")
+module.exports.NotificationIcon = require("./NotificationIcon.js")
+module.exports.UsersIcon = require("./UsersIcon.js")
+module.exports.ChatIcon = require("./ChatIcon.js")
