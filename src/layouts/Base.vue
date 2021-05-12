@@ -21,8 +21,8 @@
             <div class="flex-1 h-0 mt-5 overflow-y-auto">
               <nav class="flex flex-col h-full">
                 <div class="space-y-1">
-                  <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-purple-50 border-purple-600 text-purple-600' : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group border-l-4 py-2 px-3 flex items-center text-base font-medium']" :aria-current="item.current ? 'page' : undefined">
-                    <component :is="item.icon" :class="[item.current ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 h-6 w-6']" aria-hidden="true" />
+                  <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-pink-50 border-pink-600 text-pink-600' : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group border-l-2 py-2 px-3 flex items-center text-base font-medium']" :aria-current="item.current ? 'page' : undefined">
+                    <component :is="item.icon" :class="[item.current ? 'text-pink-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 h-6 w-6']" aria-hidden="true" />
                     {{ item.name }}
                   </a>
                 </div>
@@ -41,8 +41,6 @@
           <div class="flex items-center flex-shrink-0" :class="showLabel ? 'px-4' : 'justify-center'">
             <h5 class="font-bold" :class="showLabel ? 'hidden' : ''">Mijn CMD</h5>
             <h2 class="font-bold" :class="!showLabel ? 'hidden' : ''">Mijn CMD</h2>
-            <!--            <img class="w-auto h-8" :class="!showLabel ? 'hidden' : ''" src="https://tailwindui.com/img/logos/easywire-logo-purple-600-mark-gray-900-text.svg" alt="Easywire" />-->
-            <!--            <img class="w-auto h-8" :class="!showLabel ? '' : 'hidden'" src="https://tailwindui.com/img/logos/workflow-mark.svg" alt="Workflow" />-->
           </div>
           <span class="absolute inset-0 object-right-top left-20 top-11" :class="showLabel ? 'left-64 -ml-4' : ''">
             <div class="inline-flex items-center px-2 py-1 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-gray-800 text-white" @click="showLabel = !showLabel">
@@ -89,12 +87,12 @@
     <div class="flex flex-col flex-1">
       <div class="w-full px-6 mx-auto md:px-8">
         <div class="relative z-10 flex flex-shrink-0 h-16">
-          <button class="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 md:hidden" @click="showLabel = true">
+          <button class="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-500 md:hidden" @click="sidebarOpen = true">
             <span class="sr-only">Open sidebar</span>
             <MenuAlt2Icon class="w-6 h-6" aria-hidden="true" />
           </button>
           <div class="flex justify-between flex-1 px-4 md:px-0">
-            <div class="px-3 sm:mt-0 md:mt-4">
+            <div class="px-3 mt-2 sm:mt-4">
               <label for="search" class="sr-only">Search</label>
               <div class="relative mt-1 rounded-md shadow-sm">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" aria-hidden="true">
@@ -107,8 +105,8 @@
               </div>
             </div>
             <div class="flex items-center ml-4 md:ml-6">
-              <div class="flex mt-4 sm:mt-0 sm:ml-4">
-                <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border border-transparent rounded-md shadow-sm order-0 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">
+              <div class="flex mt-0 sm:mt-4 sm:ml-4">
+                <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border border-transparent rounded-md shadow-sm order-0 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 sm:order-1 sm:ml-3">
                   Create
                 </button>
               </div>
