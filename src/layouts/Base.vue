@@ -50,8 +50,8 @@
           </span>
           <div class="flex flex-col flex-grow mt-10" :class="showLabel ? '' : ''">
             <div class="flex-1 space-y-1">
-              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-pink-50 border-pink-600 text-pink-600' : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50', 'group border-l-2 py-2 px-3 flex items-center text-sm', showLabel ?  '' : 'justify-center']">
-                <component :is="item.icon" :class="[item.current ? 'text-pink-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 h-6 w-6']" aria-hidden="true" />
+              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-100 border-gray-900 text-gray-900' : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50', 'group border-l-2 py-2 px-3 flex items-center text-sm', showLabel ?  '' : 'justify-center']">
+                <component :is="item.icon" :class="[item.current ? 'text-gray-900' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 h-6 w-6']" aria-hidden="true" />
                 <span v-if="showLabel">{{ item.name }}</span>
               </a>
             </div>
@@ -101,7 +101,7 @@
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                   </svg>
                 </div>
-                <input type="text" name="search" id="search" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 pl-9 sm:text-sm" placeholder="Search">
+                <input type="text" name="search" id="search" class="block w-full border-none rounded-md focus:border-gray-500 focus:ring-gray-500 pl-9 sm:text-sm" placeholder="Search">
               </div>
             </div>
             <div class="flex items-center ml-4 md:ml-6">

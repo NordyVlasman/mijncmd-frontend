@@ -1,8 +1,11 @@
 <template>
     <main class="relative flex-1 overflow-y-auto focus:outline-none">
-      <div class="px-6 py-6">
+      <div class="px-2 py-6 ">
       <form @submit.prevent='createPost'>
-  <div class="space-y-6">
+        <input type="text" v-model="form.title" class="text-4xl bg-transparent border-none focus:outline-none focus:ring focus:border-transparent focus:ring-transparent" placeholder="Titel van de post" />
+        <div id="editor-container" class="mt-4 -ml-4">
+        </div>
+  <!-- <div class="space-y-6">
     <div class="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
@@ -83,7 +86,7 @@
         Save
       </button>
     </div>
-  </div>
+  </div> -->
     </form>
 
 <!-- <div>
@@ -212,6 +215,8 @@ export default {
     editor () {
       window.editor = new EditorJS({
         holderId: 'editor-container',
+        placeholder: 'Start je verhaal',
+        defaultBlock: 'paragraph',
         tools: {
           image: Image,
           code: Code,
@@ -221,10 +226,7 @@ export default {
             inlineToolbar: ['link']
           },
           paragraph: {
-            class: Paragraph,
-            config: {
-              placeholder: '.'
-            }
+            class: Paragraph
           }
         }
       })
@@ -256,4 +258,5 @@ export default {
   font-size: revert;
   font-weight: revert;
 }
+.ce-block__content, .ce-toolbar__content { max-width:calc(100% - 80px) !important; } .cdx-block { max-width: 100% !important; }
 </style>
