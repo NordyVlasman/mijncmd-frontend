@@ -1,0 +1,12 @@
+query {
+  getUser {
+    avatarUrl
+    dribbbleUrl
+    email
+    githubUrl
+    handle
+    id
+    name
+    websiteUrl
+  }
+}

@@ -1,0 +1,25 @@
+query {
+  getPosts {
+    author {
+      avatarUrl
+      dribbbleUrl
+      email
+      githubUrl
+      id
+      name
+      websiteUrl
+    }
+    cover_url
+    body
+    description
+    id
+    skills {
+      description
+      id
+      name
+      slug
+    }
+    slug
+    title
+  }
+}
