@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-2">
+    <div class="mt-6">
       <input
         v-model="form.title"
         type="text"
@@ -12,10 +12,14 @@
           focus:ring
           focus:border-transparent
           focus:ring-transparent
+          w-full
         "
         placeholder="Titel van de post"
       />
-      <div id="editor-container" class="mt-4 -ml-6 max-w-6xl"></div>
+      <div
+        id="editor-container"
+        class="mt-4 -ml-6 md:max-w-4xl lg:max-w-5xl"
+      ></div>
     </div>
     <div
       class="inset-0 overflow-auto"
@@ -31,7 +35,7 @@
                 <div class="flex items-center justify-between">
                   <h2
                     id="slide-over-title"
-                    class="text-2xl font-medium text-black"
+                    class="text-2xl font-bold text-black"
                   >
                     Post instellingen
                   </h2>
@@ -106,7 +110,8 @@
                             rounded-md
                           "
                         >
-                          <div class="space-y-1 text-center">
+                          <img v-if="image" :src="image" />
+                          <div class="space-y-1 text-center" v-if="!image">
                             <svg
                               class="mx-auto h-12 w-12 text-gray-400"
                               stroke="currentColor"
@@ -249,10 +254,30 @@
                   py-4
                   flex
                   justify-between
-                  space-x-3
+                  space-x-4
                   mb-3
                 "
               >
+                <button
+                  type="button"
+                  class="
+                    bg-transparent
+                    py-2
+                    px-4
+                    rounded-md
+                    border-none
+                    w-full
+                    text-sm
+                    font-semibold
+                    text-red-600
+                    underline
+                    focus:outline-none
+                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                  "
+                  @click="cancel"
+                >
+                  Stoppen
+                </button>
                 <button
                   type="button"
                   class="
@@ -277,27 +302,6 @@
                 >
                   Publiceren
                 </button>
-                <button
-                  type="button"
-                  class="
-                    bg-red-50
-                    py-2
-                    px-4
-                    rounded-md
-                    border-none
-                    shadow-sm
-                    w-full
-                    text-sm
-                    font-semibold
-                    text-red-600
-                    hover:bg-red-100
-                    focus:outline-none
-                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                  "
-                  @click="cancel"
-                >
-                  Stoppen
-                </button>
               </div>
             </div>
           </div>
@@ -310,9 +314,10 @@
 import EditorJS from '@editorjs/editorjs'
 import Header from '@editorjs/header'
 import Paragraph from '@editorjs/paragraph'
-import Code from '@editorjs/code'
 import List from '@editorjs/list'
 import Image from '@editorjs/image'
+import Embed from '@editorjs/embed'
+import Codebox from '@bomdi/codebox'
 
 export default {
   layout: 'create',
@@ -324,6 +329,7 @@ export default {
         body: '',
         cover: '',
       },
+      image: '',
     }
   },
   computed: {
@@ -346,10 +352,28 @@ export default {
       window.editor = new EditorJS({
         holderId: 'editor-container',
         tools: {
-          image: Image,
-          code: Code,
+          image: {
+            class: Image,
+            config: {
+              endpoints: {
+                byFile: 'http://localhost:4000/apis/upload/image',
+              },
+            },
+          },
+          codeBox: Codebox,
           list: List,
           header: Header,
+          embed: {
+            class: Embed,
+            config: {
+              services: {
+                youtube: true,
+                coub: true,
+                twitter: true,
+                instagram: true,
+              },
+            },
+          },
           paragraph: {
             class: Paragraph,
             inlineToolbar: ['bold', 'link', 'italic'],
@@ -370,7 +394,9 @@ export default {
       })
     },
     handleFileChange(e) {
-      this.form.cover = e.target.files[0]
+      const file = e.target.files[0]
+      this.form.cover = file
+      this.image = URL.createObjectURL(file)
     },
   },
 }
@@ -386,5 +412,8 @@ export default {
 }
 .cdx-block {
   max-width: 100% !important;
+}
+.ce-toolbar {
+  display: block;
 }
 </style>

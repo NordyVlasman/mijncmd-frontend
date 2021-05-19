@@ -13,6 +13,7 @@ query ($slug: String!) {
         body
         description
         id
+        cover_url
         skills {
             description
             id

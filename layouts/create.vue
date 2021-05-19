@@ -13,8 +13,26 @@
         "
         :class="showLabel ? 'w-64' : 'w-21'"
       >
-        <div class="flex items-center flex-shrink-0 px-4">
-          <img src="/logo-placeholder.png" />
+        <div class="flex items-center flex-shrink-0 px-5">
+          <nuxt-link
+            to="/"
+            class="
+              flex
+              items-center
+              justify-center
+              flex-shrink-0
+              w-10
+              h-10
+              text-white
+              transition-colors
+              duration-200
+              bg-gray-800
+              rounded
+              group-hover:bg-gray-700
+            "
+          >
+            <span class="text-md italic font-bold"> CMD </span>
+          </nuxt-link>
         </div>
         <span
           class="absolute inset-0 object-right-top left-20 top-1/2"
@@ -137,98 +155,13 @@
         </div>
       </nav>
     </div>
-    <!-- Content area -->
-    <div class="flex flex-col flex-1">
-      <div class="w-full px-6 mx-auto mt-4 md:px-8">
-        <div class="relative z-10 flex flex-shrink-0 h-16">
-          <button
-            class="
-              px-4
-              text-gray-500
-              border-r border-gray-200
-              focus:outline-none
-              focus:ring-2 focus:ring-inset focus:ring-pink-500
-              md:hidden
-            "
-            @click="sidebarOpen = true"
-          >
-            <span class="sr-only">Open sidebar</span>
-            <svg
-              class="h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
-          </button>
-          <div class="flex justify-between flex-1 px-4 md:px-0">
-            <div class="px-3 mt-2 sm:mt-4">
-              <label for="search" class="sr-only">Search</label>
-              <div class="relative mt-1 rounded-md shadow-sm">
-                <div
-                  class="
-                    absolute
-                    inset-y-0
-                    left-0
-                    flex
-                    items-center
-                    pl-3
-                    pointer-events-none
-                  "
-                  aria-hidden="true"
-                >
-                  <!-- Heroicon name: solid/search -->
-                  <svg
-                    class="w-4 h-4 mr-3 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="search"
-                  type="text"
-                  name="search"
-                  class="
-                    block
-                    w-full
-                    border-none
-                    rounded-md
-                    focus:ring-gray-900
-                    focus:border-gray-900
-                    pl-9
-                    sm:text-sm
-                  "
-                  placeholder="Search"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <main
-        class="flex-1 px-6 overflow-y-auto md:px-10 mt-8 focus:outline-none"
-      >
-        <Nuxt />
-      </main>
-    </div>
+    <main
+      class="flex-1 px-6 overflow-y-auto md:px-10 mt-8x2 focus:outline-none"
+    >
+      <Nuxt />
+    </main>
   </div>
+  <!--  </div>-->
 </template>
 
 <script>

@@ -13,6 +13,7 @@
         sm:gap-x-6
         lg:grid-cols-4
         xl:gap-x-8
+        z-20
       "
     >
       <div v-for="post in posts" :key="post.id">
