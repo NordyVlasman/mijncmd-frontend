@@ -1,5 +1,5 @@
-mutation ($body: String!, $cover: Upload, $description: String, $slug: String!, $title: String!) {
-  createPost (body: $body, cover: $cover, description: $description, slug: $slug, title: $title) {
+mutation ($postId: ID!) {
+  likePost (postId: $postId) {
     errors
     post {
       author {

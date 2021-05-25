@@ -10,7 +10,7 @@ export default {
         query: GetPostsQuery,
       })
       .then((data) => {
-        commit('SET_POSTS', data.data.getPosts)
+        commit('SET_POSTS', data.data.posts)
       })
   },
   async FETCH_POST({ commit }, slug) {
@@ -23,7 +23,7 @@ export default {
         },
       })
       .then((data) => {
-        commit('SET_POST', data.data.getPostBySlug[0])
+        commit('SET_POST', data.data.postSlug)
       })
   },
   async CREATE_POST({ commit }, formData) {

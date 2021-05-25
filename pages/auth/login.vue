@@ -10,6 +10,7 @@
 import LoginMutation from '@/graphql/login.gql'
 
 export default {
+  layout: 'auth',
   middleware: 'guest',
   data() {
     return {
@@ -31,7 +32,7 @@ export default {
           },
         })
         .then(({ data }) => {
-          this.$apolloHelpers.onLogin(data.login.token)
+          this.$apolloHelpers.onLogin(data.login.accessToken)
           this.$store.commit('auth/setUser', data.login.user)
           this.$router.push('/')
         })

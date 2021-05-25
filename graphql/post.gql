@@ -1,26 +1,54 @@
-query ($slug: String!) {
-    getPostBySlug(slug: $slug) {
-        author {
-            avatarUrl
-            dribbbleUrl
-            email
-            githubUrl
-            handle
-            id
-            name
-            websiteUrl
-        }
-        body
-        description
-        id
-        cover_url
-        skills {
-            description
-            id
-            name
-            slug
-        }
-        slug
-        title
+query ($slug: String) {
+  postSlug (slug: $slug) {
+    author {
+      avatarUrl
+      dribbbleUrl
+      email
+      githubUrl
+      handle
+      id
+      name
+      websiteUrl
     }
+    body
+    comments {
+      author {
+        avatarUrl
+        dribbbleUrl
+        email
+        githubUrl
+        handle
+        id
+        name
+        websiteUrl
+      }
+      children {
+        author {
+          avatarUrl
+          dribbbleUrl
+          email
+          githubUrl
+          handle
+          id
+          name
+          websiteUrl
+        }
+        children {
+          content
+          id
+        }
+        content
+        id
+      }
+      content
+      id
+    }
+    coverUrl
+    description
+    hasLiked
+    id
+    likesCount
+    slug
+    title
+  }
 }

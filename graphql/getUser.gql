@@ -1,5 +1,5 @@
 query {
-  getUser {
+  user {
     avatarUrl
     dribbbleUrl
     email

@@ -18,7 +18,7 @@ export const actions = {
         query: GetUserQuery,
       })
       .then((data) => {
-        commit('setUser', data.data.getUser)
+        commit('setUser', data.data.user)
       })
       .catch((error) => {
         commit('setError', error)
