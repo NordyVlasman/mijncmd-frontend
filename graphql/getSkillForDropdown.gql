@@ -1,0 +1,8 @@
+query {
+  skills {
+    description
+    id
+    name
+    slug
+  }
+}

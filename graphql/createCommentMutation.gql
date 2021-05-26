@@ -1,0 +1,37 @@
+mutation ($content: String!, $parentId: ID, $postId: ID!) {
+  commentPost (content: $content, parentId: $parentId, postId: $postId) {
+    comment {
+      author {
+        avatarUrl
+        dribbbleUrl
+        email
+        githubUrl
+        handle
+        id
+        name
+        websiteUrl
+      }
+      children {
+        author {
+          avatarUrl
+          dribbbleUrl
+          email
+          githubUrl
+          handle
+          id
+          name
+          websiteUrl
+        }
+        children {
+          content
+          id
+        }
+        content
+        id
+      }
+      content
+      id
+    }
+    errors
+  }
+}

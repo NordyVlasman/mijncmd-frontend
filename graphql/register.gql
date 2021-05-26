@@ -1,0 +1,15 @@
+mutation ($avatar: Upload, $dribbbleUrl: String, $email: String!, $githubUrl: String, $handle: String, $name: String!, $password: String!, $websiteUrl: String) {
+    register (avatar: $avatar, dribbbleUrl: $dribbbleUrl, email: $email, githubUrl: $githubUrl, handle: $handle, name: $name, password: $password, websiteUrl: $websiteUrl) {
+        errors
+        user {
+            avatarUrl
+            dribbbleUrl
+            email
+            githubUrl
+            handle
+            id
+            name
+            websiteUrl
+        }
+    }
+}

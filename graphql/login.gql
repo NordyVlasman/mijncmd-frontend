@@ -1,0 +1,16 @@
+mutation ($email: String!, $password: String!) {
+    login (email: $email, password: $password) {
+        accessToken
+        errors
+        user {
+            avatarUrl
+            dribbbleUrl
+            email
+            githubUrl
+            handle
+            id
+            name
+            websiteUrl
+        }
+    }
+}
