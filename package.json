@@ -28,7 +28,7 @@
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/typography": "^0.4.0",
     "apollo-absinthe-upload-link": "^1.7.0",
-    "core-js": "^3.9.1",
+    "core-js": "^3.13.0",
     "graphql-tag": "^2.12.4",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.15.3",
