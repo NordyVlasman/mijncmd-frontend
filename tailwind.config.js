@@ -1,14 +1,22 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: [],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        darkColor: '#212121',
+        darkBackground: '#121212',
+        cardGray: '#424242',
+      },
+      fontFamily: {
+        sans: ['Mulish', ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
   variants: {
-    extend: {}
+    extend: {},
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography')
-  ]
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }
