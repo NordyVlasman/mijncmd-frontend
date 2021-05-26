@@ -11,7 +11,10 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  css: ['~/assets/main.css'],
+  css: [
+    '~/assets/main.css',
+    '~/node_modules/vue-multiselect/dist/vue-multiselect.min.css',
+  ],
 
   plugins: [],
 

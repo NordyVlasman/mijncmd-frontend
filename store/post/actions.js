@@ -37,6 +37,7 @@ export default {
           title: formData.title,
           slug: formData.slug,
           cover: formData.cover,
+          skills: formData.skills,
         },
       })
       .then((data) => {

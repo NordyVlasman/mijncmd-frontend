@@ -43,12 +43,16 @@ query {
       content
       id
     }
-     coverUrl
+    coverUrl
     description
     hasLiked
     id
     likesCount
     slug
     title
+    skills {
+      name
+      id
+    }
   }
 }

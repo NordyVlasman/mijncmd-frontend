@@ -33,7 +33,8 @@
     "js-cookie": "^2.2.1",
     "nuxt": "^2.15.3",
     "prismjs": "^1.23.0",
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "vue-multiselect": "^2.1.6"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",

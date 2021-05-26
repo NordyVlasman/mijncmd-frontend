@@ -69,8 +69,7 @@ export default {
           },
         })
         .then(({ data }) => {
-          // eslint-disable-next-line no-console
-          console.log(data)
+          this.$forceUpdate()
         })
     },
     async likePost() {
