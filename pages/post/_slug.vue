@@ -17,13 +17,28 @@
       :src="`http://localhost:4000` + post.coverUrl"
       :alt="`Image` + post.title"
     />
-    <p class="font-semibold">{{ post.description }}</p>
     <block-renderer :content="body" class="prose" />
 
-    <div v-for="comment in post.comments" :key="comment.id">
-      {{ comment.author.name }}
-      {{ comment.content }}
+    <div class="text-white">
+      <div v-for="comment in post.comments" :key="comment.id">
+        {{ comment.author.name }}
+        {{ comment.content }}
+        <button
+          @click="upvoteComment(comment.id)"
+          :class="comment.hasUpvoted ? 'text-blue-500' : 'text-white'"
+        >
+          +
+        </button>
+        {{ comment.upvoteCount }}
+        <button
+          @click="upvoteComment(comment.id)"
+          :class="!comment.hasUpvoted ? 'text-blue-500' : 'text-white'"
+        >
+          -
+        </button>
+      </div>
     </div>
+
     <div>
       <textarea v-model="form.comment" />
       <button @click="sendFeedback">Feedback geven</button>
@@ -34,6 +49,7 @@
 <script>
 import { mapState } from 'vuex'
 import LikeMutation from '@/graphql/likePost.gql'
+import UpvoteCommentMutation from '@/graphql/upvoteCommentMutation.gql'
 import CommentMutation from '@/graphql/createCommentMutation.gql'
 import BlockRenderer from '~/components/Block'
 
@@ -70,6 +86,19 @@ export default {
         })
         .then(({ data }) => {
           this.$forceUpdate()
+        })
+    },
+    async upvoteComment(commentId) {
+      await this.$apollo
+        .mutate({
+          mutation: UpvoteCommentMutation,
+          variables: {
+            commentId,
+          },
+        })
+        .then(({ data }) => {
+          // eslint-disable-next-line no-console
+          console.log(data)
         })
     },
     async likePost() {

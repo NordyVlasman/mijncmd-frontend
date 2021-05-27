@@ -45,8 +45,11 @@ mutation ($postId: ID!) {
         content
         id
       }
+      skills {
+        name
+        id
+      }
       coverUrl
-      description
       hasLiked
       id
       likesCount
