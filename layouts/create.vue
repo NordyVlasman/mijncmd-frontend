@@ -69,7 +69,7 @@
               :to="item.href"
               :class="[
                 item.current
-                  ? 'bg-pink-50 border-pink-600 text-pink-600 dark:bg-transparent'
+                  ? ''
                   : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50',
                 'group border-l-2 py-2 px-6 flex items-center text-sm font-light',
                 showLabel ? '' : '',
@@ -79,7 +79,7 @@
                 :is="item.icon"
                 :class="[
                   item.current
-                    ? 'text-pink-500'
+                    ? 'text-gray-900'
                     : 'text-gray-400 group-hover:text-gray-500',
                   'mr-3 h-6 w-6',
                 ]"
@@ -122,7 +122,7 @@
                   <div>
                     <img
                       class="inline-block rounded-full h-9 w-9"
-                      :src="`http://localhost:4000` + me.avatarUrl"
+                      :src="$config.baseURL + me.avatarUrl"
                       alt=""
                     />
                   </div>

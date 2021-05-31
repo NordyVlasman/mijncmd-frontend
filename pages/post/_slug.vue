@@ -3,7 +3,7 @@
     <div class="w-full flex justify-between">
       <div class="flex items-center py-2">
         <img
-          :src="`http://localhost:4000` + post.author.avatarUrl"
+          :src="$config.baseURL + post.author.avatarUrl"
           :alt="post.author.name"
           class="w-12 h-12 rounded-full"
         />
@@ -48,7 +48,7 @@
           <div class="bg-white flex-grow py-2 px-4">
             <div class="flex items-center">
               <img
-                :src="`http://localhost:4000` + post.author.avatarUrl"
+                :src="$config.baseURL + post.author.avatarUrl"
                 :alt="post.author.name"
                 class="w-12 h-12 rounded-full"
               />
@@ -140,9 +140,7 @@
                       <div class="flex-shrink-0 h-10 w-10">
                         <img
                           class="h-10 w-10 rounded-full"
-                          :src="
-                            `http://localhost:4000` + comment.author.avatarUrl
-                          "
+                          :src="$config.baseURL + comment.author.avatarUrl"
                           alt=""
                         />
                       </div>
@@ -217,6 +215,9 @@ export default {
           },
         })
         .then(({ data }) => {
+          this.$store.dispatch('post/FETCH_POST', this.post.slug)
+        })
+        .catch(() => {
           this.$store.dispatch('post/FETCH_POST', this.post.slug)
         })
     },

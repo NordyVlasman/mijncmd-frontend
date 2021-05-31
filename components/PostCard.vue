@@ -23,16 +23,24 @@
         <div>
           <nuxt-link
             :to="`post/` + item.slug"
-            class="text-2xl font-medium hover:underline dark:text-white"
+            class="text-2xl font-bold hover:underline dark:text-white"
             >{{ item.title }}</nuxt-link
           >
-          <div class="flex items-center mt-4">
+          <div class="flex items-center mt-8">
             <img
-              :src="`http://localhost:4000${item.author.avatarUrl}`"
+              :src="`${$config.baseURL}${item.author.avatarUrl}`"
               :alt="post.author.name"
               class="inline w-8 h-8 mr-2 rounded-full"
             />
-            <p class="ml-1 text-gray-900 text-md dark:text-gray-300">
+            <p
+              class="
+                ml-1
+                text-gray-900
+                font-semibold
+                text-md
+                dark:text-gray-300
+              "
+            >
               {{ item.author.name }}
             </p>
           </div>

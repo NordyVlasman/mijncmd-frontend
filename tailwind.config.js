@@ -9,6 +9,8 @@ module.exports = {
         darkColor: '#212121',
         darkBackground: '#121212',
         cardGray: '#424242',
+        gradientFirst: '#30DB81',
+        gradientSecond: '#26AB93',
       },
       fontFamily: {
         sans: ['Mulish', ...defaultTheme.fontFamily.sans],

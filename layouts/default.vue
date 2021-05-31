@@ -69,8 +69,8 @@
               :to="item.href"
               :class="[
                 item.current
-                  ? 'bg-pink-50 border-pink-600 text-pink-600 dark:bg-transparent'
-                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                  ? ''
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:hover:bg-darkBackground',
                 'group border-l-2 py-2 px-6 flex items-center text-sm font-light',
                 showLabel ? '' : '',
               ]"
@@ -79,7 +79,7 @@
                 :is="item.icon"
                 :class="[
                   item.current
-                    ? 'text-pink-500'
+                    ? 'text-gray-900 dark:text-white'
                     : 'text-gray-400 group-hover:text-gray-500',
                   'mr-3 h-6 w-6',
                 ]"
@@ -122,7 +122,7 @@
                   <div>
                     <img
                       class="inline-block rounded-full h-9 w-9"
-                      :src="`http://localhost:4000` + me.avatarUrl"
+                      :src="$config.baseURL + me.avatarUrl"
                       alt=""
                     />
                   </div>
@@ -144,6 +144,7 @@
                         text-gray-500
                         group-hover:text-gray-700
                       "
+                      @click="onLogout"
                     >
                       View profile
                     </p>
@@ -187,52 +188,62 @@
             </svg>
           </button>
           <div class="flex justify-between flex-1 px-4 md:px-0">
-            <div class="px-3 mt-2 sm:mt-4">
-              <label for="search" class="sr-only">Search</label>
-              <div class="relative mt-1 rounded-md shadow-sm">
-                <div
-                  class="
-                    absolute
-                    inset-y-0
-                    left-0
-                    flex
-                    items-center
-                    pl-3
-                    pointer-events-none
-                  "
-                  aria-hidden="true"
-                >
-                  <!-- Heroicon name: solid/search -->
-                  <svg
-                    class="w-4 h-4 mr-3 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
+            <div class="flex-1 flex justify-between">
+              <div class="w-1/3 mt-0 sm:mt-4 hidden md:block">
+                <label for="search" class="sr-only">Search projects</label>
+                <div class="relative text-gray-400 focus-within:text-gray-400">
+                  <div
+                    class="
+                      absolute
+                      inset-y-0
+                      left-0
+                      pl-3
+                      flex
+                      items-center
+                      pointer-events-none
+                    "
                   >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+                    <!-- Heroicon name: solid/search -->
+                    <svg
+                      class="h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    id="search"
+                    name="search"
+                    class="
+                      block
+                      w-full
+                      pl-10
+                      pr-3
+                      py-2
+                      border border-transparent
+                      rounded-md
+                      leading-5
+                      bg-white
+                      text-indigo-100
+                      placeholder-gray-400
+                      focus:outline-none
+                      focus:bg-white
+                      focus:ring-0
+                      focus:placeholder-gray-400
+                      focus:text-gray-900
+                      sm:text-sm
+                    "
+                    placeholder="Zoeken"
+                    type="search"
+                  />
                 </div>
-                <input
-                  id="search"
-                  type="text"
-                  name="search"
-                  class="
-                    block
-                    w-full
-                    border-none
-                    rounded-md
-                    focus:ring-gray-900
-                    focus:border-gray-900
-                    pl-9
-                    sm:text-sm
-                  "
-                  placeholder="Search"
-                />
               </div>
             </div>
             <div class="flex items-center ml-4 md:ml-6">
@@ -242,26 +253,26 @@
                   class="
                     inline-flex
                     items-center
-                    px-4
+                    px-9
                     py-2
                     text-sm
                     font-medium
                     text-white
+                    hover:text-gray-200
                     bg-gradient-to-br
-                    from-green-800
-                    to-green-500
-                    border border-transparent
+                    from-gradientFirst
+                    to-gradientSecond
+                    border border-none
                     rounded-md
                     shadow-sm
-                    order-0
                     hover:bg-gray-900
                     focus:outline-none
-                    focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
+                    ring-0
                     sm:order-1
                     sm:ml-3
                   "
                 >
-                  Create
+                  Uploaden
                 </nuxt-link>
               </div>
             </div>
@@ -336,6 +347,13 @@ export default {
   },
   created() {
     this.$store.dispatch('auth/getUser')
+  },
+  methods: {
+    async onLogout() {
+      await this.$apolloHelpers.onLogout().then(() => {
+        this.$router.push('/auth/login')
+      })
+    },
   },
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
-  <div class="mt-2">
-    <h1 class="text-2xl text-black dark:text-gray-300">
+  <div class="mt-1">
+    <h1 class="text-2xl text-black font-light dark:text-gray-300">
       Bekijk hieronder wat <span class="font-bold">andere studenten</span>
       hebben gemaakt
     </h1>
     <div
       class="
-        py-4
-        grid grid-cols-2
+        py-7
+        grid grid-cols-1
         gap-x-4 gap-y-4
         sm:grid-cols-3
         sm:gap-x-6

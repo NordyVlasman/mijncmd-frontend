@@ -22,7 +22,7 @@ export default {
 
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/apollo'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/apollo', '@nuxtjs/dotenv'],
 
   axios: {},
 
@@ -47,6 +47,10 @@ export default {
     manifest: {
       lang: 'en',
     },
+  },
+
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || 'http://localhost:4000',
   },
 
   build: {},

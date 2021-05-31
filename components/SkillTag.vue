@@ -9,8 +9,8 @@
       rounded-full
       text-xs
       font-medium
-      bg-gray-200
-      text-gray-800
+      bg-gray-100
+      text-gray-400
     "
   >
     {{ skill.name }}
