@@ -33,7 +33,9 @@ export default {
   },
 
   apollo: {
-    tokenExpires: 7,
+    cookieAttributes: {
+      expires: 7,
+    },
     includeNodeModules: true,
     authenticationType: 'Bearer',
     clientConfigs: {

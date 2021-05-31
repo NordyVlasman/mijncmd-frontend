@@ -1,6 +1,8 @@
 <template>
   <div class="col-span-1">
-    <article class="overflow-hidden rounded-lg shadow-lg dark:bg-cardGray">
+    <article
+      class="overflow-hidden rounded-lg shadow-lg bg-white dark:bg-cardGray"
+    >
       <div class="relative col-span-3 row-span-2 bg-gray-100">
         <div v-if="item.coverUrl">
           <img
@@ -15,39 +17,6 @@
             alt="Post item image"
             class="block w-full h-72"
           />
-        </div>
-        <div class="absolute bottom-0 w-full px-5 pb-5">
-          <div class="flex justify-end">
-            <span
-              class="
-                px-2
-                py-2
-                bg-white
-                rounded-md
-                hover:bg-gray-100
-                cursor-pointer
-              "
-              :class="
-                item.hasLiked ? 'bg-red-600 text-white hover:bg-red-700' : ''
-              "
-              @click="likePost"
-            >
-              <heart-icon />
-            </span>
-            <span
-              class="
-                px-2
-                py-2
-                ml-2
-                bg-white
-                rounded-md
-                hover:bg-gray-100
-                cursor-pointer
-              "
-            >
-              <chat-icon />
-            </span>
-          </div>
         </div>
       </div>
       <header class="flex p-2 md:p-4">
@@ -69,7 +38,7 @@
           </div>
         </div>
       </header>
-      <div class="flex justify-between p-2 space-x-8 md:p-4">
+      <div class="flex justify-between p-2 space-x-8 md:px-4 pb-4">
         <div class="flex space-x-2" :if="item.skills">
           <div v-for="skill in item.skills" :key="skill.id">
             <SkillTag :skill="skill" />
@@ -81,16 +50,10 @@
 </template>
 
 <script>
-import LikeMutation from '@/graphql/likePost.gql'
-import DislikeMutation from '@/graphql/dislikePost.gql'
-
 import SkillTag from '~/components/SkillTag'
 
-import ChatIcon from '~/components/icons/ChatIcon'
-import HeartIcon from '~/components/icons/HeartIcon'
-
 export default {
-  components: { SkillTag, HeartIcon, ChatIcon },
+  components: { SkillTag },
   props: {
     post: {
       type: Object,
@@ -101,33 +64,6 @@ export default {
     return {
       item: this.post,
     }
-  },
-  methods: {
-    async likePost() {
-      if (!this.item.hasLiked) {
-        await this.$apollo
-          .mutate({
-            mutation: LikeMutation,
-            variables: {
-              postId: this.post.id,
-            },
-          })
-          .then(({ data }) => {
-            this.item = data.likePost.post
-          })
-      } else {
-        this.$apollo
-          .mutate({
-            mutation: DislikeMutation,
-            variables: {
-              postId: this.post.id,
-            },
-          })
-          .then(({ data }) => {
-            this.item = data.dislikePost.post
-          })
-      }
-    },
   },
 }
 </script>
