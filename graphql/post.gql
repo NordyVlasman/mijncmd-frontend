@@ -35,19 +35,30 @@ query ($slug: String) {
         }
         children {
           content
+          hasUpvoted
           id
+          upvoteCount
         }
         content
+        hasUpvoted
         id
+        upvoteCount
       }
       content
+      hasUpvoted
       id
+      upvoteCount
     }
     coverUrl
-    description
     hasLiked
     id
     likesCount
+    skills {
+      description
+      id
+      name
+      slug
+    }
     slug
     title
   }

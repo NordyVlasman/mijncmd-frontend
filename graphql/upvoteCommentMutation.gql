@@ -1,17 +1,6 @@
-query {
-  posts {
-    author {
-       avatarUrl
-      dribbbleUrl
-      email
-      githubUrl
-      handle
-      id
-      name
-      websiteUrl
-    }
-    body
-    comments {
+mutation ($commentId: ID!) {
+  upvoteComment (commentId: $commentId) {
+    comment {
       author {
         avatarUrl
         dribbbleUrl
@@ -24,7 +13,7 @@ query {
       }
       children {
         author {
-           avatarUrl
+          avatarUrl
           dribbbleUrl
           email
           githubUrl
@@ -35,23 +24,20 @@ query {
         }
         children {
           content
+          hasUpvoted
           id
+          upvoteCount
         }
         content
+        hasUpvoted
         id
+        upvoteCount
       }
       content
+      hasUpvoted
       id
+      upvoteCount
     }
-    coverUrl
-    hasLiked
-    id
-    likesCount
-    slug
-    title
-    skills {
-      name
-      id
-    }
+    errors
   }
 }

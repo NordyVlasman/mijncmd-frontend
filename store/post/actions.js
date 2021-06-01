@@ -33,7 +33,6 @@ export default {
         mutation: CreatePostMutation,
         variables: {
           body: formData.body,
-          description: formData.description,
           title: formData.title,
           slug: formData.slug,
           cover: formData.cover,
