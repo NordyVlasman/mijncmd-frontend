@@ -50,7 +50,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'http://localhost:4000',
+    baseURL: process.env.BASE_URL || 'https://api.nordyvlasman.nl',
   },
 
   build: {},
