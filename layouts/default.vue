@@ -85,7 +85,16 @@
                 ]"
                 aria-hidden="true"
               />
-              <span v-if="showLabel" class="ml-2">{{ item.name }}</span>
+              <span
+                v-if="showLabel"
+                class="ml-2"
+                :class="
+                  item.current
+                    ? 'tet-gray-900 dark:text-white'
+                    : 'text-gray-400'
+                "
+                >{{ item.name }}</span
+              >
             </nuxt-link>
           </div>
         </div>
@@ -119,7 +128,7 @@
             <div class="flex flex-shrink-0 p-4">
               <a href="#" class="flex-shrink-0 block w-full group">
                 <div class="flex items-center px-2">
-                  <div>
+                  <div v-if="me.avatarUrl">
                     <img
                       class="inline-block rounded-full h-9 w-9"
                       :src="$config.baseURL + me.avatarUrl"

@@ -1,14 +1,16 @@
 <template>
-  <div class="col-span-1">
-    <article
-      class="overflow-hidden rounded-lg shadow-lg bg-white dark:bg-cardGray"
-    >
-      <div class="relative col-span-3 row-span-2 bg-gray-100">
+  <nuxt-link
+    :to="`post/` + item.slug"
+    class="flex-1 bg-white rounded-md shadow-md dark:bg-darkColor"
+  >
+    <article>
+      <div class="relative col-span-3 row-span-2">
         <div v-if="item.coverUrl">
           <img
             :src="`https://api.nordyvlasman.nl` + item.coverUrl"
+            loading="lazy"
             alt="Post item image"
-            class="block w-full h-72"
+            class="block w-full h-72 object-contain"
           />
         </div>
         <div v-else>
@@ -21,11 +23,9 @@
       </div>
       <header class="flex p-2 md:p-4">
         <div>
-          <nuxt-link
-            :to="`post/` + item.slug"
-            class="text-2xl font-bold hover:underline dark:text-white"
-            >{{ item.title }}</nuxt-link
-          >
+          <h2 class="text-2xl font-bold hover:underline dark:text-white">
+            {{ item.title }}
+          </h2>
           <div class="flex items-center mt-8">
             <img
               :src="`${$config.baseURL}${item.author.avatarUrl}`"
@@ -46,7 +46,7 @@
           </div>
         </div>
       </header>
-      <div class="flex justify-between p-2 space-x-8 md:px-4 pb-4">
+      <div class="bottom-0 flex justify-between p-2 space-x-8 md:px-4 pb-4">
         <div class="flex space-x-2" :if="item.skills">
           <div v-for="skill in item.skills" :key="skill.id">
             <SkillTag :skill="skill" />
@@ -54,7 +54,7 @@
         </div>
       </div>
     </article>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>

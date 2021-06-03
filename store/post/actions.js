@@ -12,6 +12,9 @@ export default {
       .then((data) => {
         commit('SET_POSTS', data.data.posts)
       })
+      .catch((error) => {
+        commit('SET_ERROR', error)
+      })
   },
   async FETCH_POST({ commit }, slug) {
     const client = this.app.apolloProvider.defaultClient

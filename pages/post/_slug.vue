@@ -24,7 +24,7 @@
         </span>
       </div>
     </div>
-    <h1 class="text-2xl text-black dark:text-white mt-3 font-bold mb-4">
+    <h1 class="text-2xl text-black dark:text-white mt-9 font-semibold mb-4">
       {{ post.title }}
     </h1>
 
@@ -108,7 +108,9 @@
                       <downvote-icon
                         class="fill-current"
                         :class="
-                          !comment.hasUpvoted ? 'text-red-500' : 'text-gray-400'
+                          !comment.hasUpvoted
+                            ? 'text-gray-400'
+                            : 'text-gray-400'
                         "
                       />
                     </button>
@@ -117,21 +119,6 @@
                     <p class="text-md text-gray-700">
                       {{ comment.content }}
                     </p>
-                  </div>
-                  <div>
-                    <input
-                      id="comments"
-                      name="comments"
-                      type="checkbox"
-                      class="
-                        focus:ring-indigo-500
-                        h-4
-                        w-4
-                        text-indigo-600
-                        border-gray-500
-                        rounded
-                      "
-                    />
                   </div>
                 </div>
                 <div class="border-1 border-t mt-4 py-1">
@@ -155,13 +142,59 @@
                 </div>
               </li>
               <li class="bg-white rounded-md">
-                <textarea v-model="form.comment" />
-                <button
-                  class="text-black dark:text-white"
-                  @click="sendFeedback"
-                >
-                  Feedback geven
-                </button>
+                <div class="flex px-4 py-5 space-x-3">
+                  <div class="flex-shrink-0 h-10 w-10">
+                    <img
+                      class="h-10 w-10 rounded-full object-fill"
+                      :src="$config.baseURL + me.avatarUrl"
+                      alt=""
+                    />
+                  </div>
+                  <div class="ml-4 flex-grow">
+                    <textarea
+                      id="about"
+                      v-model="form.comment"
+                      name="about"
+                      placeholder="Wat vind je ervan?"
+                      rows="6"
+                      class="
+                        shadow-sm
+                        focus:ring-gray-500
+                        focus:border-gray-500
+                        block
+                        w-full
+                        sm:text-sm
+                        border-none
+                        rounded-md
+                        bg-gray-100
+                        resize-none
+                      "
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="w-full flex flex-row-reverse px-4 pb-4">
+                  <button
+                    type="button"
+                    class="
+                      inline-flex
+                      items-center
+                      px-7
+                      py-2
+                      border border-transparent
+                      text-sm
+                      rounded-md
+                      shadow-sm
+                      text-white
+                      bg-gray-800
+                      hover:bg-gray-700
+                      focus:outline-none
+                      focus:ring-2 focus:ring-offset-2 focus:ring-gray-700
+                    "
+                    @click="postFeedback"
+                  >
+                    Verstuur feedback
+                  </button>
+                </div>
               </li>
             </ul>
           </div>
@@ -199,6 +232,7 @@ export default {
   computed: {
     ...mapState({
       post: (state) => state.post.post,
+      me: (state) => state.auth.currentUser,
     }),
     body() {
       return JSON.parse(this.post.body)
@@ -215,6 +249,8 @@ export default {
           },
         })
         .then(({ data }) => {
+          // eslint-disable-next-line no-console
+          console.log('commented')
           this.$store.dispatch('post/FETCH_POST', this.post.slug)
         })
         .catch(() => {
@@ -227,6 +263,19 @@ export default {
           mutation: UpvoteCommentMutation,
           variables: {
             commentId,
+          },
+        })
+        .then(({ data }) => {
+          this.$store.dispatch('post/FETCH_POST', this.post.slug)
+        })
+    },
+    async postFeedback() {
+      await this.$apollo
+        .mutate({
+          mutation: CommentMutation,
+          variables: {
+            postId: this.post.id,
+            content: this.form.comment,
           },
         })
         .then(({ data }) => {

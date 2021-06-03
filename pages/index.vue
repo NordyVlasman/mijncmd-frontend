@@ -4,19 +4,12 @@
       Bekijk hieronder wat <span class="font-bold">andere studenten</span>
       hebben gemaakt
     </h1>
-    <div
-      class="
-        py-7
-        grid grid-cols-1
-        gap-x-4 gap-y-4
-        sm:grid-cols-3
-        sm:gap-x-6
-        lg:grid-cols-4
-        xl:gap-x-8
-        z-20
-      "
-    >
-      <div v-for="post in posts" :key="post.id">
+    <div class="-mx-4 flex flex-wrap">
+      <div
+        v-for="post in posts"
+        :key="post.id"
+        class="w-full flex flex-col p-4 sm:w-1/2 lg:w-1/4"
+      >
         <post-card :post="post" />
       </div>
     </div>
@@ -36,6 +29,7 @@ export default {
   computed: {
     ...mapState({
       posts: (state) => state.post.posts,
+      errors: (state) => state.post.errors,
     }),
   },
 }

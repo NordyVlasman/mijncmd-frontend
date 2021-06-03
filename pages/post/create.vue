@@ -13,12 +13,13 @@
           focus:border-transparent
           focus:ring-transparent
           w-full
+          dark:text-white
         "
         placeholder="Titel van de post"
       />
       <div
         id="editor-container"
-        class="mt-4 -ml-6 md:max-w-4xl lg:max-w-5xl"
+        class="mt-4 -ml-6 md:max-w-4xl lg:max-w-5xl prose prose-dark"
       ></div>
     </div>
     <div
@@ -30,12 +31,20 @@
       <div class="overflow-hidden">
         <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
           <div class="w-screen max-w-md">
-            <div class="h-full flex flex-col bg-white overflow-y-scroll">
+            <div
+              class="
+                h-full
+                flex flex-col
+                bg-white
+                dark:bg-darkColor
+                overflow-y-scroll
+              "
+            >
               <div class="py-8 px-4 sm:px-6">
                 <div class="flex items-center justify-between">
                   <h2
                     id="slide-over-title"
-                    class="text-2xl font-bold text-black"
+                    class="text-2xl font-bold text-black dark:text-white"
                   >
                     Post instellingen
                   </h2>
@@ -47,11 +56,17 @@
                     <div>
                       <label
                         for="title"
-                        class="block text-sm font-medium text-gray-900"
+                        class="
+                          block
+                          text-sm
+                          font-medium
+                          text-gray-900
+                          dark:text-gray-200
+                        "
                       >
                         Titel
                       </label>
-                      <div class="mt-1">
+                      <div class="mt-1.5">
                         <input
                           id="title"
                           v-model="form.title"
@@ -62,9 +77,12 @@
                             w-full
                             shadow-sm
                             sm:text-sm
-                            focus:ring-indigo-500
-                            focus:border-indigo-500
+                            focus:ring-gray-500
+                            focus:border-gray-500
                             border-gray-300
+                            dark:bg-darkColor
+                            dark:border-gray-400
+                            dark:text-gray-200
                             rounded-md
                           "
                         />
@@ -81,6 +99,7 @@
                             pt-5
                             pb-6
                             border-2 border-gray-300 border-dashed
+                            dark:border-gray-400
                             rounded-md
                           "
                         >
@@ -100,13 +119,21 @@
                                 stroke-linejoin="round"
                               />
                             </svg>
-                            <div class="flex text-sm text-gray-600">
+                            <div
+                              class="
+                                flex
+                                text-sm text-gray-600
+                                dark:text-gray-400
+                              "
+                            >
                               <label
                                 for="file-upload"
                                 class="
                                   relative
                                   cursor-pointer
                                   bg-white
+                                  dark:bg-transparent
+                                  dark:text-gray-300
                                   rounded-md
                                   font-medium
                                   text-gray-900
@@ -137,7 +164,14 @@
                       <div class="mt-2">
                         <label
                           for="slug"
-                          class="block text-sm font-medium text-gray-900 pt-5"
+                          class="
+                            block
+                            text-sm
+                            font-medium
+                            text-gray-900
+                            dark:text-gray-200
+                            pt-5
+                          "
                         >
                           Slug
                         </label>
@@ -152,10 +186,13 @@
                               w-full
                               shadow-sm
                               sm:text-sm
-                              focus:ring-indigo-500
-                              focus:border-indigo-500
+                              focus:ring-gray-500
+                              focus:border-gray-500
                               border-gray-300
                               rounded-md
+                              dark:bg-darkColor
+                              dark:border-gray-400
+                              dark:text-gray-200
                             "
                           />
                           <p class="mt-2 text-sm text-gray-500">
@@ -169,11 +206,18 @@
                       <div class="mt-2">
                         <label
                           for="tags"
-                          class="block text-sm font-medium text-gray-900 pt-5"
+                          class="
+                            block
+                            text-sm
+                            font-medium
+                            text-gray-900
+                            dark:text-gray-200
+                            pt-5
+                          "
                         >
                           Tags
                         </label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="mt-1.5 relative rounded-md shadow-sm">
                           <multiselect
                             id="tags"
                             v-model="form.skills"
@@ -260,12 +304,13 @@
 import SkillQuery from '@/graphql/getSkillForDropdown.gql'
 import EditorJS from '@editorjs/editorjs'
 import Header from '@editorjs/header'
-import Paragraph from '@editorjs/paragraph'
+import Paragraph from 'editorjs-paragraph-with-alignment'
 import List from '@editorjs/list'
 import Image from '@editorjs/image'
 import Embed from '@editorjs/embed'
 import Codebox from '@bomdi/codebox'
 import Multiselect from 'vue-multiselect'
+import AlignmentTuneTool from 'editorjs-text-alignment-blocktune'
 
 export default {
   components: {
@@ -310,6 +355,7 @@ export default {
     editor() {
       window.editor = new EditorJS({
         holderId: 'editor-container',
+        placeholder: 'Begin hier met je post',
         tools: {
           image: {
             class: Image,
@@ -335,7 +381,17 @@ export default {
           },
           paragraph: {
             class: Paragraph,
-            inlineToolbar: ['bold', 'link', 'italic'],
+            inlineToolbar: ['anyTuneName', 'bold', 'link', 'italic'],
+          },
+          anyTuneName: {
+            class: AlignmentTuneTool,
+            config: {
+              default: 'right',
+              blocks: {
+                header: 'center',
+                list: 'right',
+              },
+            },
           },
         },
       })
@@ -373,5 +429,19 @@ export default {
 }
 .cdx-block {
   max-width: 100% !important;
+}
+
+.multiselect__input {
+  background-color: transparent;
+}
+@media (prefers-color-scheme: dark) {
+  .multiselect__content-wrapper {
+    background-color: #121212;
+    color: whit;
+  }
+  .multiselect__tags {
+    background-color: rgba(33, 33, 33, 1);
+    border-color: rgba(156, 163, 175, 1);
+  }
 }
 </style>

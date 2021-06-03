@@ -35,10 +35,10 @@
           </nuxt-link>
         </div>
         <span
-          class="absolute inset-0 object-right-top left-20 top-1/2"
-          :class="showLabel ? 'left-64 -ml-4' : ''"
+          class="absolute inset-0 w-10 h-10 object-right-top left-20 top-1/2"
+          :class="showLabel ? 'left-64 -ml-4' : '-ml-2'"
         >
-          <div
+          <span
             class="
               inline-flex
               items-center
@@ -59,7 +59,7 @@
           >
             <span v-if="showLabel"> &lt; </span>
             <span v-if="!showLabel"> > </span>
-          </div>
+          </span>
         </span>
         <div class="flex flex-col flex-grow mt-10" :class="showLabel ? '' : ''">
           <div class="flex-1 space-y-2">
@@ -70,7 +70,7 @@
               :class="[
                 item.current
                   ? ''
-                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:hover:bg-darkBackground',
                 'group border-l-2 py-2 px-6 flex items-center text-sm font-light',
                 showLabel ? '' : '',
               ]"
@@ -79,13 +79,22 @@
                 :is="item.icon"
                 :class="[
                   item.current
-                    ? 'text-gray-900'
+                    ? 'text-gray-900 dark:text-white'
                     : 'text-gray-400 group-hover:text-gray-500',
                   'mr-3 h-6 w-6',
                 ]"
                 aria-hidden="true"
               />
-              <span v-if="showLabel" class="ml-2">{{ item.name }}</span>
+              <span
+                v-if="showLabel"
+                class="ml-2"
+                :class="
+                  item.current
+                    ? 'tet-gray-900 dark:text-white'
+                    : 'text-gray-400'
+                "
+                >{{ item.name }}</span
+              >
             </nuxt-link>
           </div>
         </div>
@@ -119,7 +128,7 @@
             <div class="flex flex-shrink-0 p-4">
               <a href="#" class="flex-shrink-0 block w-full group">
                 <div class="flex items-center px-2">
-                  <div>
+                  <div v-if="me.avatarUrl">
                     <img
                       class="inline-block rounded-full h-9 w-9"
                       :src="$config.baseURL + me.avatarUrl"
@@ -144,6 +153,7 @@
                         text-gray-500
                         group-hover:text-gray-700
                       "
+                      @click="onLogout"
                     >
                       View profile
                     </p>
