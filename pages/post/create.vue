@@ -315,7 +315,7 @@ export default {
             class: Image,
             config: {
               endpoints: {
-                byFile: 'http://localhost:4000/upload/image',
+                byFile: 'https://api.nordyvlasman.nl/upload/image',
               },
             },
           },
