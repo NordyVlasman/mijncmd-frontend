@@ -6,7 +6,7 @@
       <div class="relative col-span-3 row-span-2 bg-gray-100">
         <div v-if="item.coverUrl">
           <img
-            :src="`http://localhost:4000` + item.coverUrl"
+            :src="`https://api.nordyvlasman.nl` + item.coverUrl"
             alt="Post item image"
             class="block w-full h-72"
           />
