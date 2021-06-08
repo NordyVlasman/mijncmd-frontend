@@ -7,7 +7,7 @@
       <div class="relative col-span-3 row-span-2">
         <div v-if="item.coverUrl">
           <img
-            :src="`https://api.nordyvlasman.nl` + item.coverUrl"
+            :src="$config.baseURL + item.coverUrl"
             loading="lazy"
             alt="Post item image"
             class="block w-full h-72 object-contain"

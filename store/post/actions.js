@@ -40,6 +40,7 @@ export default {
           slug: formData.slug,
           cover: formData.cover,
           skills: formData.skills,
+          products: formData.products,
         },
       })
       .then((data) => {

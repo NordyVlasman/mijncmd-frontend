@@ -1,9 +1,36 @@
 <template>
   <div class="mt-8">
     <div class="mt-6 space-y-6">
-      <input v-model="form.email" type="email" class="bg-gray-300" />
-      <input v-model="form.password" type="password" class="bg-gray-300" />
-      <input v-model="form.name" type="text" class="bg-gray-300" />
+      <input
+        v-model="form.email"
+        type="email"
+        class="bg-gray-300"
+        placeholder="Email"
+      />
+      <input
+        v-model="form.password"
+        type="password"
+        class="bg-gray-300"
+        placeholder="Wachtwoord"
+      />
+      <select v-model="form.role">
+        <option disabled selected>Selecteer een rol</option>
+        <option v-for="role in roles" :key="role.slug" :value="role.slug">
+          {{ role.slug }}
+        </option>
+      </select>
+      <input
+        v-model="form.name"
+        type="text"
+        class="bg-gray-300"
+        placeholder="Naam"
+      />
+      <input
+        v-model="form.title"
+        type="text"
+        class="bg-gray-300"
+        placeholder="Titel"
+      />
       <input v-model="sluggedName" disabled type="text" class="bg-gray-300" />
       <div>
         <div class="mt-1">
@@ -73,6 +100,7 @@
   </div>
 </template>
 <script>
+import RolesQuery from '@/graphql/roles.gql'
 import RegisterMutation from '@/graphql/register.gql'
 
 export default {
@@ -84,16 +112,28 @@ export default {
       form: {
         name: '',
         email: '',
+        title: '',
+        role: null,
         password: '',
         avatar: '',
       },
       image: '',
+      roles: null,
     }
   },
   computed: {
     sluggedName() {
       return this.slugger(this.form.name)
     },
+  },
+  mounted() {
+    this.$apollo
+      .query({
+        query: RolesQuery,
+      })
+      .then(({ data }) => {
+        this.roles = data.roles
+      })
   },
   methods: {
     slugger(title) {
@@ -118,11 +158,12 @@ export default {
             password: this.form.password,
             avatar: this.form.avatar,
             handle: this.sluggedName,
+            title: this.form.title,
+            role: this.form.role,
           },
         })
         .then(({ data }) => {
-          // eslint-disable-next-line no-console
-          console.log(data)
+          this.$router.push('/auth/login')
         })
         .catch((err) => {
           this.error = err

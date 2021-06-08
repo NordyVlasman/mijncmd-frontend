@@ -3,24 +3,19 @@ mutation ($content: String!, $parentId: ID, $postId: ID!) {
     comment {
       author {
         avatarUrl
-        dribbbleUrl
         email
-        githubUrl
         handle
         id
         name
-        websiteUrl
       }
       children {
         author {
           avatarUrl
-          dribbbleUrl
           email
-          githubUrl
           handle
           id
+          title
           name
-          websiteUrl
         }
         children {
           content

@@ -9,7 +9,7 @@
         />
         <div class="text-darkBackground dark:text-gray-400 ml-3">
           <h3>{{ post.author.name }}</h3>
-          <p>Software developer</p>
+          <p>{{ post.author.title }}</p>
         </div>
       </div>
       <div class="self-center">
@@ -54,14 +54,14 @@
               />
               <div class="text-darkBackground dark:text-gray-400 ml-3">
                 <h3>{{ post.author.name }}</h3>
-                <p class="text-gray-500">Software developer</p>
+                <p class="text-gray-500">{{ post.author.title }}</p>
               </div>
             </div>
             <div class="py-4">
               <h4 class="text-gray-800">Creative fields</h4>
               <div class="flex justify-between mt-1">
-                <div class="flex space-x-2" :if="post.skills">
-                  <div v-for="skill in post.skills" :key="skill.id">
+                <div class="flex space-x-2" :if="post.author.skills">
+                  <div v-for="skill in post.author.skills" :key="skill.id">
                     <SkillTag :skill="skill" />
                   </div>
                 </div>
@@ -71,8 +71,12 @@
           <div class="bg-white flex-grow py-2 px-4">
             <h2 class="font-semibold">Tools</h2>
             <ul>
-              <li class="text-gray-500">
-                <p>Photoshop</p>
+              <li
+                v-for="product in post.products"
+                :key="product.id"
+                class="text-gray-500"
+              >
+                <p>{{ product.name }}</p>
               </li>
             </ul>
           </div>
@@ -135,7 +139,9 @@
                         <div class="text-sm font-medium text-gray-900">
                           {{ comment.author.name }}
                         </div>
-                        <div class="text-sm text-gray-500">2 uur geleden</div>
+                        <div class="text-sm text-gray-500">
+                          {{ $moment(comment.inserted_at).fromNow() }}
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -159,8 +165,7 @@
                       rows="6"
                       class="
                         shadow-sm
-                        focus:ring-gray-500
-                        focus:border-gray-500
+                        focus:ring-gray-500 focus:border-gray-500
                         block
                         w-full
                         sm:text-sm
@@ -188,7 +193,9 @@
                       bg-gray-800
                       hover:bg-gray-700
                       focus:outline-none
-                      focus:ring-2 focus:ring-offset-2 focus:ring-gray-700
+                      focus:ring-2
+                      focus:ring-offset-2
+                      focus:ring-gray-700
                     "
                     @click="postFeedback"
                   >
@@ -210,9 +217,9 @@ import LikeMutation from '@/graphql/likePost.gql'
 import DislikeMutation from '@/graphql/dislikePost.gql'
 import UpvoteCommentMutation from '@/graphql/upvoteCommentMutation.gql'
 import CommentMutation from '@/graphql/createCommentMutation.gql'
-import HeartIcon from '@/components/icons/HeartIcon'
-import UpvoteIcon from '@/components/icons/UpvoteIcon'
-import DownvoteIcon from '@/components/icons/DownvoteIcon'
+import HeartIcon from '~/components/HeartIcon'
+import UpvoteIcon from '~/components/UpvoteIcon'
+import DownvoteIcon from '~/components/DownvoteIcon'
 import BlockRenderer from '~/components/Block'
 import SkillTag from '~/components/SkillTag'
 

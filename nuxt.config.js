@@ -20,9 +20,19 @@ export default {
 
   components: true,
 
-  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/moment',
+  ],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/apollo', '@nuxtjs/dotenv'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
+    '@nuxtjs/apollo',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/sentry',
+  ],
 
   axios: {},
 
@@ -30,6 +40,10 @@ export default {
     color: 'black',
     height: '5px',
     continuous: true,
+  },
+
+  moment: {
+    defaultLocale: 'nl',
   },
 
   apollo: {
@@ -43,6 +57,14 @@ export default {
     },
   },
 
+  sentry: {
+    dsn: 'https://fb1db2e126ae4be381c187881956c6ea@o476979.ingest.sentry.io/5803851',
+    config: {
+      // Add native Sentry config here
+      // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
+    },
+  },
+
   pwa: {
     manifest: {
       lang: 'en',
@@ -50,7 +72,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'https://api.nordyvlasman.nl',
+    baseURL: process.env.BASE_URL || 'https://mijncmd.docker.localhost',
   },
 
   build: {},

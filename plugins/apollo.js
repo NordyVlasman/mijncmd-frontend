@@ -2,7 +2,9 @@ import { createLink } from 'apollo-absinthe-upload-link'
 import { ApolloLink, InMemoryCache } from '@apollo/client'
 
 export default (ctx) => {
-  const httpLink = createLink({ uri: 'https://api.nordyvlasman.nl/graphql' })
+  const httpLink = createLink({
+    uri: process.env.BASE_URL + '/graphql',
+  })
   const cache = new InMemoryCache()
 
   return {

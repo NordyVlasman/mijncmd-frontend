@@ -4,36 +4,27 @@ mutation ($postId: ID!) {
     post {
       author {
         avatarUrl
-        dribbbleUrl
         email
-        githubUrl
         handle
         id
         name
-        websiteUrl
       }
       body
       comments {
         author {
           avatarUrl
-          dribbbleUrl
           email
-          githubUrl
           handle
           id
           name
-          websiteUrl
         }
         children {
           author {
             avatarUrl
-            dribbbleUrl
             email
-            githubUrl
             handle
             id
             name
-            websiteUrl
           }
           children {
             content
