@@ -1,58 +1,70 @@
-query ($slug: String) {
+query postSlug ($slug: String) {
   postSlug (slug: $slug) {
     author {
       avatarUrl
-      dribbbleUrl
       email
-      githubUrl
       handle
       id
       name
-      websiteUrl
+      role
+      title
+      skills {
+        description
+        id
+        name
+        slug
+      }
     }
     body
     comments {
       author {
         avatarUrl
-        dribbbleUrl
         email
-        githubUrl
         handle
         id
         name
-        websiteUrl
+        role
+        title
       }
       children {
         author {
           avatarUrl
-          dribbbleUrl
           email
-          githubUrl
           handle
           id
           name
-          websiteUrl
+          role
+          title
         }
         children {
           content
           hasUpvoted
           id
           upvoteCount
+          inserted_at
         }
         content
         hasUpvoted
         id
         upvoteCount
+        inserted_at
       }
       content
       hasUpvoted
       id
+      inserted_at
       upvoteCount
     }
     coverUrl
     hasLiked
     id
     likesCount
+    products {
+      description
+      id
+      name
+      slug
+    }
     skills {
       description
       id

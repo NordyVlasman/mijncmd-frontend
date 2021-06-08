@@ -1,54 +1,69 @@
-mutation ($body: String!, $cover: Upload, $skills: [ID], $slug: String!, $title: String!) {
-  createPost (body: $body, cover: $cover, skills: $skills, slug: $slug, title: $title) {
+mutation ($body: String!, $cover: Upload, $products: [ID], $skills: [ID], $slug: String!, $title: String!) {
+  createPost (body: $body, cover: $cover, products: $products, skills: $skills, slug: $slug, title: $title) {
     errors
     post {
       author {
         avatarUrl
-        dribbbleUrl
         email
-        githubUrl
         handle
         id
         name
-        websiteUrl
+        role
+        title
       }
       body
       comments {
         author {
           avatarUrl
-          dribbbleUrl
           email
-          githubUrl
           handle
           id
           name
-          websiteUrl
+          role
+          title
         }
         children {
           author {
             avatarUrl
-            dribbbleUrl
             email
-            githubUrl
             handle
             id
             name
-            websiteUrl
+            role
+            title
           }
           children {
             content
+            hasUpvoted
             id
+            upvoteCount
           }
           content
+          hasUpvoted
           id
+          upvoteCount
         }
         content
+        hasUpvoted
         id
+        upvoteCount
       }
       coverUrl
       hasLiked
       id
       likesCount
+      products {
+        description
+        id
+        name
+        slug
+      }
+      skills {
+        description
+        id
+        name
+        slug
+      }
       slug
       title
     }

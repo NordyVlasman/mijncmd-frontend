@@ -1,0 +1,8 @@
+query {
+  products {
+    description
+    id
+    name
+    slug
+  }
+}

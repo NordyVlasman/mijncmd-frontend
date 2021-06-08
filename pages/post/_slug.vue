@@ -9,7 +9,7 @@
         />
         <div class="text-darkBackground dark:text-gray-400 ml-3">
           <h3>{{ post.author.name }}</h3>
-          <p>Software developer</p>
+          <p>{{ post.author.title }}</p>
         </div>
       </div>
       <div class="self-center">
@@ -24,7 +24,7 @@
         </span>
       </div>
     </div>
-    <h1 class="text-2xl text-black dark:text-white mt-3 font-bold mb-4">
+    <h1 class="text-2xl text-black dark:text-white mt-9 font-semibold mb-4">
       {{ post.title }}
     </h1>
 
@@ -54,14 +54,14 @@
               />
               <div class="text-darkBackground dark:text-gray-400 ml-3">
                 <h3>{{ post.author.name }}</h3>
-                <p class="text-gray-500">Software developer</p>
+                <p class="text-gray-500">{{ post.author.title }}</p>
               </div>
             </div>
             <div class="py-4">
               <h4 class="text-gray-800">Creative fields</h4>
               <div class="flex justify-between mt-1">
-                <div class="flex space-x-2" :if="post.skills">
-                  <div v-for="skill in post.skills" :key="skill.id">
+                <div class="flex space-x-2" :if="post.author.skills">
+                  <div v-for="skill in post.author.skills" :key="skill.id">
                     <SkillTag :skill="skill" />
                   </div>
                 </div>
@@ -71,8 +71,12 @@
           <div class="bg-white flex-grow py-2 px-4">
             <h2 class="font-semibold">Tools</h2>
             <ul>
-              <li class="text-gray-500">
-                <p>Photoshop</p>
+              <li
+                v-for="product in post.products"
+                :key="product.id"
+                class="text-gray-500"
+              >
+                <p>{{ product.name }}</p>
               </li>
             </ul>
           </div>
@@ -108,7 +112,9 @@
                       <downvote-icon
                         class="fill-current"
                         :class="
-                          !comment.hasUpvoted ? 'text-red-500' : 'text-gray-400'
+                          !comment.hasUpvoted
+                            ? 'text-gray-400'
+                            : 'text-gray-400'
                         "
                       />
                     </button>
@@ -117,21 +123,6 @@
                     <p class="text-md text-gray-700">
                       {{ comment.content }}
                     </p>
-                  </div>
-                  <div>
-                    <input
-                      id="comments"
-                      name="comments"
-                      type="checkbox"
-                      class="
-                        focus:ring-indigo-500
-                        h-4
-                        w-4
-                        text-indigo-600
-                        border-gray-500
-                        rounded
-                      "
-                    />
                   </div>
                 </div>
                 <div class="border-1 border-t mt-4 py-1">
@@ -148,20 +139,69 @@
                         <div class="text-sm font-medium text-gray-900">
                           {{ comment.author.name }}
                         </div>
-                        <div class="text-sm text-gray-500">2 uur geleden</div>
+                        <div class="text-sm text-gray-500">
+                          {{ $moment(comment.inserted_at).fromNow() }}
+                        </div>
                       </div>
                     </div>
                   </td>
                 </div>
               </li>
               <li class="bg-white rounded-md">
-                <textarea v-model="form.comment" />
-                <button
-                  class="text-black dark:text-white"
-                  @click="sendFeedback"
-                >
-                  Feedback geven
-                </button>
+                <div class="flex px-4 py-5 space-x-3">
+                  <div class="flex-shrink-0 h-10 w-10">
+                    <img
+                      class="h-10 w-10 rounded-full object-fill"
+                      :src="$config.baseURL + me.avatarUrl"
+                      alt=""
+                    />
+                  </div>
+                  <div class="ml-4 flex-grow">
+                    <textarea
+                      id="about"
+                      v-model="form.comment"
+                      name="about"
+                      placeholder="Wat vind je ervan?"
+                      rows="6"
+                      class="
+                        shadow-sm
+                        focus:ring-gray-500 focus:border-gray-500
+                        block
+                        w-full
+                        sm:text-sm
+                        border-none
+                        rounded-md
+                        bg-gray-100
+                        resize-none
+                      "
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="w-full flex flex-row-reverse px-4 pb-4">
+                  <button
+                    type="button"
+                    class="
+                      inline-flex
+                      items-center
+                      px-7
+                      py-2
+                      border border-transparent
+                      text-sm
+                      rounded-md
+                      shadow-sm
+                      text-white
+                      bg-gray-800
+                      hover:bg-gray-700
+                      focus:outline-none
+                      focus:ring-2
+                      focus:ring-offset-2
+                      focus:ring-gray-700
+                    "
+                    @click="postFeedback"
+                  >
+                    Verstuur feedback
+                  </button>
+                </div>
               </li>
             </ul>
           </div>
@@ -177,9 +217,9 @@ import LikeMutation from '@/graphql/likePost.gql'
 import DislikeMutation from '@/graphql/dislikePost.gql'
 import UpvoteCommentMutation from '@/graphql/upvoteCommentMutation.gql'
 import CommentMutation from '@/graphql/createCommentMutation.gql'
-import HeartIcon from '@/components/icons/HeartIcon'
-import UpvoteIcon from '@/components/icons/UpvoteIcon'
-import DownvoteIcon from '@/components/icons/DownvoteIcon'
+import HeartIcon from '~/components/HeartIcon'
+import UpvoteIcon from '~/components/UpvoteIcon'
+import DownvoteIcon from '~/components/DownvoteIcon'
 import BlockRenderer from '~/components/Block'
 import SkillTag from '~/components/SkillTag'
 
@@ -199,6 +239,7 @@ export default {
   computed: {
     ...mapState({
       post: (state) => state.post.post,
+      me: (state) => state.auth.currentUser,
     }),
     body() {
       return JSON.parse(this.post.body)
@@ -215,6 +256,8 @@ export default {
           },
         })
         .then(({ data }) => {
+          // eslint-disable-next-line no-console
+          console.log('commented')
           this.$store.dispatch('post/FETCH_POST', this.post.slug)
         })
         .catch(() => {
@@ -227,6 +270,19 @@ export default {
           mutation: UpvoteCommentMutation,
           variables: {
             commentId,
+          },
+        })
+        .then(({ data }) => {
+          this.$store.dispatch('post/FETCH_POST', this.post.slug)
+        })
+    },
+    async postFeedback() {
+      await this.$apollo
+        .mutate({
+          mutation: CommentMutation,
+          variables: {
+            postId: this.post.id,
+            content: this.form.comment,
           },
         })
         .then(({ data }) => {

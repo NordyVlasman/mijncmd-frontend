@@ -1,57 +1,68 @@
-query {
+query posts {
   posts {
     author {
-       avatarUrl
-      dribbbleUrl
+      avatarUrl
       email
-      githubUrl
       handle
       id
       name
-      websiteUrl
+      role
+      title
     }
     body
     comments {
       author {
         avatarUrl
-        dribbbleUrl
         email
-        githubUrl
         handle
         id
         name
-        websiteUrl
+        role
+        title
       }
       children {
         author {
-           avatarUrl
-          dribbbleUrl
+          avatarUrl
           email
-          githubUrl
           handle
           id
           name
-          websiteUrl
+          role
+          title
         }
         children {
           content
+          hasUpvoted
           id
+          upvoteCount
         }
         content
+        hasUpvoted
         id
+        upvoteCount
       }
       content
+      hasUpvoted
       id
+      upvoteCount
     }
     coverUrl
     hasLiked
     id
     likesCount
+    products {
+      description
+      id
+      name
+      slug
+    }
+    skills {
+      description
+      id
+      name
+      slug
+    }
     slug
     title
-    skills {
-      name
-      id
-    }
   }
 }

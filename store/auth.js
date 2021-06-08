@@ -18,7 +18,11 @@ export const actions = {
         query: GetUserQuery,
       })
       .then((data) => {
-        commit('setUser', data.data.user)
+        if (data.data.user === null) {
+          commit('setError', 'null')
+        } else {
+          commit('setUser', data.data.user)
+        }
       })
       .catch((error) => {
         commit('setError', error)
@@ -37,5 +41,9 @@ export const mutations = {
   },
   setError(state, error) {
     state.error = error
+    Cookies.set('user', null)
+    this.$apolloHelpers.onLogout().then(() => {
+      this.$router.push('/auth/login')
+    })
   },
 }

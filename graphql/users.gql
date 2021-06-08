@@ -1,11 +1,17 @@
 query {
-  user {
+  users {
     avatarUrl
     email
     handle
     id
     name
     role
+    skills {
+      description
+      id
+      name
+      slug
+    }
     title
   }
 }

@@ -6,7 +6,7 @@
       items-center
       px-2.5
       py-0.5
-      rounded-full
+      rounded-md
       text-xs
       font-medium
       bg-gray-100
