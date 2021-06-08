@@ -19,7 +19,7 @@
             "
             @click="sidebarOpen = true"
           >
-            <span class="sr-only">Open sidebar</span>
+            <span class="sr-only">Open</span>
             <svg
               class="h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"

@@ -16,8 +16,7 @@
         px-4
         py-12
         sm:px-6
-        lg:flex-none
-        lg:px-20
+        lg:flex-none lg:px-20
         xl:px-20
       "
     >
@@ -28,9 +27,12 @@
           </h2>
           <p class="mt-2 text-sm text-gray-600">
             Of
-            <a href="#" class="font-medium text-gray-900 hover:text-gray-700">
+            <nuxt-link
+              to="/auth/register"
+              class="font-medium text-gray-900 hover:text-gray-700"
+            >
               maak een account aan
-            </a>
+            </nuxt-link>
           </p>
         </div>
 

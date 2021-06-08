@@ -404,7 +404,9 @@ export default {
             class: Image,
             config: {
               endpoints: {
-                byFile: process.env.BASE_URL + '/upload/image',
+                byFile:
+                  process.env.BASE_URL ||
+                  'https://api.nordyvlasman.nl' + '/upload/image',
               },
             },
           },
