@@ -72,7 +72,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'https://mijncmd.docker.localhost',
+    baseURL: process.env.BASE_URL || 'https://api.nordyvlasman.nl',
   },
 
   build: {},
