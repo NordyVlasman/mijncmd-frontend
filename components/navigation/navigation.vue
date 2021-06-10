@@ -22,9 +22,11 @@
           w-10
           h-10
           text-white
-          transition-colors
           duration-200
-          bg-gray-800
+          bg-gradient-to-br
+          from-red-400
+          via-green-400
+          to-purple-500
           rounded
           group-hover:bg-gray-700
         "
