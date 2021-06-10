@@ -3,7 +3,9 @@ import { ApolloLink, InMemoryCache } from '@apollo/client'
 
 export default (ctx) => {
   const httpLink = createLink({
-    uri: process.env.BASE_URL || 'https://api.nordyvlasman.nl' + '/graphql',
+    uri:
+      process.env.BASE_URL + '/graphql' ||
+      'https://api.nordyvlasman.nl' + '/graphql',
   })
   const cache = new InMemoryCache()
 

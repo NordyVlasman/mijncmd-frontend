@@ -66,8 +66,14 @@ export default {
   },
 
   pwa: {
+    meta: {
+      title: 'MijnCMD',
+      author: 'CMD Leeuwarden',
+    },
     manifest: {
-      lang: 'en',
+      lang: 'nl',
+      background_color: '#FFFFFF',
+      theme_color: '#bababa',
     },
   },
 
