@@ -19,7 +19,15 @@
       />
       <div
         id="editor-container"
-        class="mt-4 -ml-6 md:max-w-4xl lg:max-w-5xl prose dark:prose-dark"
+        class="
+          mt-4
+          -ml-6
+          md:max-w-3xl
+          lg:max-w-3xl
+          xl:max-w-5xl
+          prose
+          dark:prose-dark
+        "
       ></div>
     </div>
     <div
@@ -54,40 +62,6 @@
                 <div class="px-4 divide-y divide-gray-200 sm:px-6">
                   <div class="space-y-6 pt-2 pb-5">
                     <div>
-                      <label
-                        for="title"
-                        class="
-                          block
-                          text-sm
-                          font-medium
-                          text-gray-900
-                          dark:text-gray-200
-                        "
-                      >
-                        Titel
-                      </label>
-                      <div class="mt-1.5">
-                        <input
-                          id="title"
-                          v-model="form.title"
-                          type="text"
-                          name="title"
-                          class="
-                            block
-                            w-full
-                            shadow-sm
-                            sm:text-sm
-                            focus:ring-gray-500 focus:border-gray-500
-                            border-gray-300
-                            dark:bg-darkColor
-                            dark:border-gray-400
-                            dark:text-gray-200
-                            rounded-md
-                          "
-                        />
-                      </div>
-                    </div>
-                    <div>
                       <div class="mt-1">
                         <div
                           class="
@@ -95,29 +69,31 @@
                             flex
                             justify-center
                             px-6
-                            pt-5
-                            pb-6
-                            border-2 border-gray-300 border-dashed
-                            dark:border-gray-400
+                            pt-14
+                            pb-14
+                            bg-gray-100
+                            dark:bg-darkBackground
                             rounded-md
                           "
                         >
-                          <img v-if="image" :src="image" />
+                          <div class="group">
+                            <img
+                              v-if="image"
+                              :src="image"
+                              class="
+                                filter
+                                group
+                                relative
+                                group-hover:blur-sm
+                                z-0
+                                cursor-pointer
+                              "
+                              placeholder="Verwijderen"
+                              @click="image = null"
+                            />
+                            <!--                            <div class="absolute inset-0 bg-cover bg-center z-0 filter hover:blur-sm" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/3/3c/JumanjiTheNextLevelTeaserPoster.jpg')"></div>-->
+                          </div>
                           <div v-if="!image" class="space-y-1 text-center">
-                            <svg
-                              class="mx-auto h-12 w-12 text-gray-400"
-                              stroke="currentColor"
-                              fill="none"
-                              viewBox="0 0 48 48"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              />
-                            </svg>
                             <div
                               class="
                                 flex
@@ -130,11 +106,13 @@
                                 class="
                                   relative
                                   cursor-pointer
-                                  bg-white
+                                  px-4
+                                  py-3
+                                  bg-buttonGray
                                   dark:bg-transparent dark:text-gray-300
                                   rounded-md
                                   font-medium
-                                  text-gray-900
+                                  text-gray-600
                                   hover:text-gray-500
                                   focus-within:outline-none
                                   focus-within:ring-2
@@ -142,7 +120,10 @@
                                   focus-within:ring-indigo-500
                                 "
                               >
-                                <span>Upload a file</span>
+                                <div class="flex items-center gap-x-1.5">
+                                  <UploadIcon />
+                                  <span>Upload cover afbeelding</span>
+                                </div>
                                 <input
                                   id="file-upload"
                                   name="file-upload"
@@ -151,11 +132,7 @@
                                   @change="handleFileChange"
                                 />
                               </label>
-                              <p class="pl-1">or drag and drop</p>
                             </div>
-                            <p class="text-xs text-gray-500">
-                              PNG, JPG, GIF up to 10MB
-                            </p>
                           </div>
                         </div>
                       </div>
@@ -185,11 +162,10 @@
                               shadow-sm
                               sm:text-sm
                               focus:ring-gray-500 focus:border-gray-500
-                              border-gray-300
                               rounded-md
-                              dark:bg-darkColor
-                              dark:border-gray-400
-                              dark:text-gray-200
+                              border-none
+                              bg-gray-100
+                              dark:bg-darkBackground dark:text-gray-200
                             "
                           />
                           <p class="mt-2 text-sm text-gray-500">
@@ -222,6 +198,7 @@
                             placeholder="Search or add a tag"
                             label="name"
                             :multiple="true"
+                            :max="3"
                             :options="options.map((option) => option.id)"
                             :custom-label="
                               (opt) => options.find((x) => x.id == opt).name
@@ -253,6 +230,7 @@
                             label="name"
                             :multiple="true"
                             :allow-empty="false"
+                            :max="3"
                             :options="productOptions.map((option) => option.id)"
                             :custom-label="
                               (opt) =>
@@ -345,9 +323,11 @@ import Embed from '@editorjs/embed'
 import Codebox from '@bomdi/codebox'
 import Multiselect from 'vue-multiselect'
 import AlignmentBlockTune from 'editorjs-text-alignment-blocktune'
+import UploadIcon from '~/components/UploadIcon'
 
 export default {
   components: {
+    UploadIcon,
     Multiselect,
   },
   layout: 'create',
@@ -396,6 +376,7 @@ export default {
         .replace('/--/g', '-')
     },
     editor() {
+      window.hop = this.$config
       window.editor = new EditorJS({
         holder: 'editor-container',
         placeholder: 'Begin hier met je post',
@@ -404,9 +385,7 @@ export default {
             class: Image,
             config: {
               endpoints: {
-                byFile:
-                  process.env.BASE_URL ||
-                  'https://api.nordyvlasman.nl' + '/upload/image',
+                byFile: window.hop.baseURL + '/upload/image',
               },
             },
           },
@@ -477,14 +456,21 @@ export default {
 .cdx-block {
   max-width: 100% !important;
 }
-
+.multiselect__content-wrapper {
+  background-color: #f3f4f6;
+}
+.multiselect__tags {
+  background-color: #f3f4f6;
+  border: none;
+}
 .multiselect__input {
-  background-color: transparent;
+  background-color: #f3f4f6;
+  border: none;
 }
 @media (prefers-color-scheme: dark) {
   .multiselect__content-wrapper {
     background-color: #121212;
-    color: whit;
+    color: white;
   }
   .multiselect__tags {
     background-color: rgba(33, 33, 33, 1);

@@ -23,10 +23,7 @@
           h-10
           text-white
           duration-200
-          bg-gradient-to-br
-          from-red-400
-          via-green-400
-          to-purple-500
+          bg-gray-900
           rounded
           group-hover:bg-gray-700
         "

@@ -4,17 +4,41 @@
       <input
         v-model="form.email"
         type="email"
-        class="bg-gray-300"
+        class="
+          block
+          w-full
+          px-3
+          py-2
+          placeholder-gray-400
+          border border-gray-300
+          rounded-md
+          shadow-sm
+          appearance-none
+          focus:outline-none focus:ring-gray-900 focus:border-gray-900
+          sm:text-sm
+        "
         placeholder="Email"
       />
       <input
         v-model="form.password"
         type="password"
-        class="bg-gray-300"
+        class="
+          block
+          w-full
+          px-3
+          py-2
+          placeholder-gray-400
+          border border-gray-300
+          rounded-md
+          shadow-sm
+          appearance-none
+          focus:outline-none focus:ring-gray-900 focus:border-gray-900
+          sm:text-sm
+        "
         placeholder="Wachtwoord"
       />
       <select v-model="form.role">
-        <option disabled selected>Selecteer een rol</option>
+        <option disabled selected>Selecteer een rol (wees eerlijk)</option>
         <option v-for="role in roles" :key="role.slug" :value="role.slug">
           {{ role.slug }}
         </option>
@@ -22,13 +46,37 @@
       <input
         v-model="form.name"
         type="text"
-        class="bg-gray-300"
+        class="
+          block
+          w-full
+          px-3
+          py-2
+          placeholder-gray-400
+          border border-gray-300
+          rounded-md
+          shadow-sm
+          appearance-none
+          focus:outline-none focus:ring-gray-900 focus:border-gray-900
+          sm:text-sm
+        "
         placeholder="Naam"
       />
       <input
         v-model="form.title"
         type="text"
-        class="bg-gray-300"
+        class="
+          block
+          w-full
+          px-3
+          py-2
+          placeholder-gray-400
+          border border-gray-300
+          rounded-md
+          shadow-sm
+          appearance-none
+          focus:outline-none focus:ring-gray-900 focus:border-gray-900
+          sm:text-sm
+        "
         placeholder="Titel"
       />
       <input v-model="sluggedName" disabled type="text" class="bg-gray-300" />

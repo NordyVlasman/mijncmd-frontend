@@ -28,7 +28,7 @@
       {{ post.title }}
     </h1>
 
-    <div class="grid grid-cols-1 gap-4 items-start lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 mb-8">
       <div class="grid grid-cols-1 gap-4 lg:col-span-2">
         <block-renderer
           :content="body"
@@ -40,8 +40,6 @@
             bg-white
             dark:bg-darkColor
             rounded-md
-            px-2
-            py-2
           "
         />
         <div class="flex gap-5 w-full">
@@ -148,60 +146,61 @@
                 </div>
               </li>
               <li class="bg-white rounded-md">
-                <div class="flex px-4 py-5 space-x-3">
-                  <div class="flex-shrink-0 h-10 w-10">
-                    <img
-                      class="h-10 w-10 rounded-full object-fill"
-                      :src="$config.baseURL + me.avatarUrl"
-                      alt=""
-                    />
+                <form action="#" @submit.prevent="postFeedback">
+                  <div class="flex px-4 py-5 space-x-3">
+                    <div class="flex-shrink-0 h-10 w-10">
+                      <img
+                        class="h-10 w-10 rounded-full object-fill"
+                        :src="$config.baseURL + me.avatarUrl"
+                        alt=""
+                      />
+                    </div>
+                    <div class="ml-4 flex-grow">
+                      <textarea
+                        id="about"
+                        v-model="form.comment"
+                        name="about"
+                        placeholder="Wat vind je ervan?"
+                        rows="6"
+                        class="
+                          shadow-sm
+                          focus:ring-gray-500 focus:border-gray-500
+                          block
+                          w-full
+                          sm:text-sm
+                          border-none
+                          rounded-md
+                          bg-gray-100
+                          resize-none
+                        "
+                      ></textarea>
+                    </div>
                   </div>
-                  <div class="ml-4 flex-grow">
-                    <textarea
-                      id="about"
-                      v-model="form.comment"
-                      name="about"
-                      placeholder="Wat vind je ervan?"
-                      rows="6"
+                  <div class="w-full flex flex-row-reverse px-4 pb-4">
+                    <button
+                      type="submit"
                       class="
-                        shadow-sm
-                        focus:ring-gray-500 focus:border-gray-500
-                        block
-                        w-full
-                        sm:text-sm
-                        border-none
+                        inline-flex
+                        items-center
+                        px-7
+                        py-2
+                        border border-transparent
+                        text-sm
                         rounded-md
-                        bg-gray-100
-                        resize-none
+                        shadow-sm
+                        text-white
+                        bg-gray-800
+                        hover:bg-gray-700
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-offset-2
+                        focus:ring-gray-700
                       "
-                    ></textarea>
+                    >
+                      Verstuur feedback
+                    </button>
                   </div>
-                </div>
-                <div class="w-full flex flex-row-reverse px-4 pb-4">
-                  <button
-                    type="button"
-                    class="
-                      inline-flex
-                      items-center
-                      px-7
-                      py-2
-                      border border-transparent
-                      text-sm
-                      rounded-md
-                      shadow-sm
-                      text-white
-                      bg-gray-800
-                      hover:bg-gray-700
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-offset-2
-                      focus:ring-gray-700
-                    "
-                    @click="postFeedback"
-                  >
-                    Verstuur feedback
-                  </button>
-                </div>
+                </form>
               </li>
             </ul>
           </div>
@@ -307,8 +306,6 @@ export default {
           },
         })
         .then(({ data }) => {
-          // eslint-disable-next-line no-console
-          console.log('commented')
           this.$store.dispatch('post/FETCH_POST', this.post.slug)
         })
         .catch(() => {

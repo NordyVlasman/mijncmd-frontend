@@ -26,13 +26,7 @@ export default {
     '@nuxtjs/moment',
   ],
 
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '@nuxtjs/apollo',
-    '@nuxtjs/dotenv',
-    '@nuxtjs/sentry',
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/apollo', '@nuxtjs/sentry'],
 
   axios: {},
 

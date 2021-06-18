@@ -6,6 +6,25 @@ module.exports = {
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
+      animation: {
+        blob: 'blob 7s infinite',
+      },
+      keyframes: {
+        blob: {
+          '0%': {
+            transform: 'translate(0px, 0px) scale(1)',
+          },
+          '33%': {
+            transform: 'translate(30px, -50px) scale(1.2)',
+          },
+          '66%': {
+            transform: 'translate(-20px, 20px) scale(0.8)',
+          },
+          '100%': {
+            transform: 'translate(0px, 0px) scale(1)',
+          },
+        },
+      },
       colors: {
         ...colors,
         darkColor: '#212121',
@@ -13,6 +32,7 @@ module.exports = {
         cardGray: '#424242',
         gradientFirst: '#30DB81',
         gradientSecond: '#26AB93',
+        buttonGray: '#E1E1E1',
         ...defaultTheme.colors,
       },
       fontFamily: {
@@ -50,6 +70,7 @@ module.exports = {
   variants: {
     extend: {
       typography: ['dark'],
+      blur: ['hover', 'focus', 'group-hover'],
     },
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
