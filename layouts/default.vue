@@ -46,7 +46,7 @@
                       absolute
                       inset-y-0
                       left-0
-                      pl-3
+                      pl-2
                       flex
                       items-center
                       pointer-events-none
@@ -79,7 +79,7 @@
                       border border-transparent
                       rounded-md
                       leading-5
-                      bg-white
+                      bg-gray-50
                       text-indigo-100
                       placeholder-gray-400
                       focus:outline-none
@@ -88,7 +88,9 @@
                       focus:placeholder-gray-400
                       focus:text-gray-900
                       sm:text-sm
+                      cursor-not-allowed
                     "
+                    disabled
                     placeholder="Zoeken"
                     type="search"
                   />
@@ -96,7 +98,7 @@
               </div>
             </div>
             <div class="flex items-center ml-4 md:ml-6">
-              <div class="flex mt-0 sm:mt-4 sm:ml-4 px-6">
+              <div class="flex mt-0 sm:mt-4 sm:ml-4 px-2">
                 <nuxt-link
                   to="/post/create"
                   class="
