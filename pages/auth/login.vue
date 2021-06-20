@@ -23,9 +23,7 @@
               rounded-md
               shadow-sm
               appearance-none
-              focus:outline-none
-              focus:ring-gray-900
-              focus:border-gray-900
+              focus:outline-none focus:ring-gray-900 focus:border-gray-900
               sm:text-sm
             "
           />
@@ -54,9 +52,7 @@
               rounded-md
               shadow-sm
               appearance-none
-              focus:outline-none
-              focus:ring-gray-900
-              focus:border-gray-900
+              focus:outline-none focus:ring-gray-900 focus:border-gray-900
               sm:text-sm
             "
           />
@@ -107,7 +103,9 @@
             shadow-sm
             hover:bg-gray-700
             focus:outline-none
-            focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
+            focus:ring-2
+            focus:ring-offset-2
+            focus:ring-gray-900
           "
           @click="login"
         >
@@ -118,7 +116,7 @@
   </div>
 </template>
 <script>
-import LoginMutation from '@/graphql/login.gql'
+import LoginMutation from '@/graphql/auth/login.gql'
 
 export default {
   layout: 'auth',

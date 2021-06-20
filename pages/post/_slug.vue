@@ -212,18 +212,17 @@
 
 <script>
 import { mapState } from 'vuex'
-import LikeMutation from '@/graphql/likePost.gql'
-import DislikeMutation from '@/graphql/dislikePost.gql'
-import UpvoteCommentMutation from '@/graphql/upvoteCommentMutation.gql'
-import CommentMutation from '@/graphql/createCommentMutation.gql'
+import LikeMutation from '@/graphql/post/likePost.gql'
+import DislikeMutation from '@/graphql/post/dislikePost.gql'
+import UpvoteCommentMutation from '@/graphql/comment/upvoteCommentMutation.gql'
+import CommentMutation from '@/graphql/comment/createCommentMutation.gql'
 import HeartIcon from '~/components/HeartIcon'
 import UpvoteIcon from '~/components/UpvoteIcon'
 import DownvoteIcon from '~/components/DownvoteIcon'
-import BlockRenderer from '~/components/Block'
-import SkillTag from '~/components/SkillTag'
+import BlockRenderer from '~/components/post/BlockRenderer'
+import SkillTag from '~/components/skill/SkillTag'
 
 export default {
-  // eslint-disable-next-line vue/no-unused-components
   components: { BlockRenderer, HeartIcon, UpvoteIcon, DownvoteIcon, SkillTag },
   data() {
     return {

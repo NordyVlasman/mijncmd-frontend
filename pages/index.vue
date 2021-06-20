@@ -18,12 +18,12 @@
 
 <script>
 import { mapState } from 'vuex'
-import PostCard from '~/components/PostCard'
+import PostCard from '~/components/post/PostCard'
 
 export default {
   components: { PostCard },
   middleware: 'authenticated',
-  async fetch({ store, params }) {
+  async fetch({ store }) {
     await store.dispatch('post/FETCH_POSTS')
   },
   computed: {

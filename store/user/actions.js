@@ -1,5 +1,5 @@
-import GetUersQuery from '@/graphql/users.gql'
-import GetPostQuery from '@/graphql/post.gql'
+import GetUersQuery from '@/graphql/user/users.gql'
+import GetPostQuery from '@/graphql/post/post.gql'
 
 export default {
   async FETCH_USERS({ commit }) {

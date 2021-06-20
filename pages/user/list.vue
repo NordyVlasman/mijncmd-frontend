@@ -36,12 +36,12 @@
 
 <script>
 import { mapState } from 'vuex'
-import SkillTag from '~/components/SkillTag'
+import SkillTag from '~/components/skill/SkillTag'
 
 export default {
   components: { SkillTag },
   middleware: 'authenticated',
-  async fetch({ store, params }) {
+  async fetch({ store }) {
     await store.dispatch('user/FETCH_USERS')
   },
   computed: {

@@ -1,6 +1,6 @@
-import GetPostsQuery from '@/graphql/posts.gql'
-import GetPostQuery from '@/graphql/post.gql'
-import CreatePostMutation from '@/graphql/createPost.gql'
+import GetPostsQuery from '@/graphql/post/posts.gql'
+import GetPostQuery from '@/graphql/post/post.gql'
+import CreatePostMutation from '@/graphql/post/createPost.gql'
 
 export default {
   async FETCH_POSTS({ commit }) {
