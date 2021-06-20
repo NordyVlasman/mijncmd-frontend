@@ -212,10 +212,10 @@
 
 <script>
 import { mapState } from 'vuex'
-import LikeMutation from '@/graphql/likePost.gql'
-import DislikeMutation from '@/graphql/dislikePost.gql'
-import UpvoteCommentMutation from '@/graphql/upvoteCommentMutation.gql'
-import CommentMutation from '@/graphql/createCommentMutation.gql'
+import LikeMutation from '@/graphql/post/likePost.gql'
+import DislikeMutation from '@/graphql/post/dislikePost.gql'
+import UpvoteCommentMutation from '@/graphql/comment/upvoteCommentMutation.gql'
+import CommentMutation from '@/graphql/comment/createCommentMutation.gql'
 import HeartIcon from '~/components/HeartIcon'
 import UpvoteIcon from '~/components/UpvoteIcon'
 import DownvoteIcon from '~/components/DownvoteIcon'

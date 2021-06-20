@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import GetUserQuery from '@/graphql/getUser.gql'
+import GetUserQuery from '@/graphql/user/getUser.gql'
 
 export const state = () => ({
   currentUser: {},

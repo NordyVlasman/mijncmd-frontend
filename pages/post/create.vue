@@ -312,8 +312,8 @@
   </div>
 </template>
 <script>
-import SkillQuery from '@/graphql/getSkillForDropdown.gql'
-import ProductQuery from '@/graphql/getProductsForDropdown.gql'
+import SkillQuery from '@/graphql/skill/getSkillForDropdown.gql'
+import ProductQuery from '@/graphql/product/getProductsForDropdown.gql'
 import EditorJS from '@editorjs/editorjs'
 import Header from '@editorjs/header'
 import Paragraph from 'editorjs-paragraph-with-alignment'

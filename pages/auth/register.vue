@@ -148,8 +148,8 @@
   </div>
 </template>
 <script>
-import RolesQuery from '@/graphql/roles.gql'
-import RegisterMutation from '@/graphql/register.gql'
+import RolesQuery from '@/graphql/user/roles.gql'
+import RegisterMutation from '@/graphql/auth/register.gql'
 
 export default {
   layout: 'auth',
