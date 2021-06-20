@@ -219,8 +219,8 @@ import CommentMutation from '@/graphql/comment/createCommentMutation.gql'
 import HeartIcon from '~/components/HeartIcon'
 import UpvoteIcon from '~/components/UpvoteIcon'
 import DownvoteIcon from '~/components/DownvoteIcon'
-import BlockRenderer from '~/components/Block'
-import SkillTag from '~/components/SkillTag'
+import BlockRenderer from '~/components/post/BlockRenderer'
+import SkillTag from '~/components/skill/SkillTag'
 
 export default {
   components: { BlockRenderer, HeartIcon, UpvoteIcon, DownvoteIcon, SkillTag },

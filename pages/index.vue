@@ -18,7 +18,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import PostCard from '~/components/PostCard'
+import PostCard from '~/components/post/PostCard'
 
 export default {
   components: { PostCard },
