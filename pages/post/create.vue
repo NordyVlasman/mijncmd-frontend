@@ -80,6 +80,7 @@
                             <img
                               v-if="image"
                               :src="image"
+                              alt="cover"
                               class="
                                 filter
                                 group
@@ -88,10 +89,8 @@
                                 z-0
                                 cursor-pointer
                               "
-                              placeholder="Verwijderen"
                               @click="image = null"
                             />
-                            <!--                            <div class="absolute inset-0 bg-cover bg-center z-0 filter hover:blur-sm" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/3/3c/JumanjiTheNextLevelTeaserPoster.jpg')"></div>-->
                           </div>
                           <div v-if="!image" class="space-y-1 text-center">
                             <div
@@ -120,10 +119,10 @@
                                   focus-within:ring-indigo-500
                                 "
                               >
-                                <div class="flex items-center gap-x-1.5">
+                                <span class="flex items-center gap-x-1.5">
                                   <UploadIcon />
                                   <span>Upload cover afbeelding</span>
-                                </div>
+                                </span>
                                 <input
                                   id="file-upload"
                                   name="file-upload"
@@ -201,7 +200,7 @@
                             :max="3"
                             :options="options.map((option) => option.id)"
                             :custom-label="
-                              (opt) => options.find((x) => x.id == opt).name
+                              (opt) => options.find((x) => x.id === opt).name
                             "
                             :taggable="true"
                           ></multiselect>
@@ -234,7 +233,7 @@
                             :options="productOptions.map((option) => option.id)"
                             :custom-label="
                               (opt) =>
-                                productOptions.find((x) => x.id == opt).name
+                                productOptions.find((x) => x.id === opt).name
                             "
                             :taggable="true"
                           ></multiselect>
@@ -429,7 +428,6 @@ export default {
       // eslint-disable-next-line no-undef
       editor.save().then((savedData) => {
         payload.body = JSON.stringify(savedData)
-        console.log(payload.body)
         payload.slug = this.slug
         this.$store.dispatch('post/CREATE_POST', payload).then(() => {
           this.$router.push('/')

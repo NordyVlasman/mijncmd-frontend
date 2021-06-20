@@ -41,7 +41,7 @@ import SkillTag from '~/components/SkillTag'
 export default {
   components: { SkillTag },
   middleware: 'authenticated',
-  async fetch({ store, params }) {
+  async fetch({ store }) {
     await store.dispatch('user/FETCH_USERS')
   },
   computed: {

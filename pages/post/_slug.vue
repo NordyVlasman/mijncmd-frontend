@@ -223,7 +223,6 @@ import BlockRenderer from '~/components/Block'
 import SkillTag from '~/components/SkillTag'
 
 export default {
-  // eslint-disable-next-line vue/no-unused-components
   components: { BlockRenderer, HeartIcon, UpvoteIcon, DownvoteIcon, SkillTag },
   data() {
     return {

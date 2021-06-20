@@ -23,7 +23,7 @@ import PostCard from '~/components/PostCard'
 export default {
   components: { PostCard },
   middleware: 'authenticated',
-  async fetch({ store, params }) {
+  async fetch({ store }) {
     await store.dispatch('post/FETCH_POSTS')
   },
   computed: {
