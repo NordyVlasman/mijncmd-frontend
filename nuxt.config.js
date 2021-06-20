@@ -53,10 +53,6 @@ export default {
 
   sentry: {
     dsn: 'https://fb1db2e126ae4be381c187881956c6ea@o476979.ingest.sentry.io/5803851',
-    config: {
-      // Add native Sentry config here
-      // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
-    },
   },
 
   pwa: {
