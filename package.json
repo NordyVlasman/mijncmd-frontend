@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.18",
+    "@apollo/client": "^3.4.1",
     "@bomdi/codebox": "^1.0.12",
     "@editorjs/code": "^2.7.0",
     "@editorjs/editorjs": "^2.21.0",
