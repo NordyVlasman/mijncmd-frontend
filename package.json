@@ -28,7 +28,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/sentry": "^5.1.0",
     "@tailwindcss/forms": "^0.3.2",
-    "@tailwindcss/typography": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
     "apollo-absinthe-upload-link": "^1.7.0",
     "core-js": "^3.15.2",
     "editorjs-paragraph-with-alignment": "3.x",
